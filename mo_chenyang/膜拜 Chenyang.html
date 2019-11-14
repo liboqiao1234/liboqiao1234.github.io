@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<link rel="shortcut icon" type="image/ico" href="https://lmoliver.github.io/mosiyuan/favicon.ico">
+		<title>膜拜 Siyuan</title>
+	</head>
+	<body>
+		<style>
+			#global{
+				position: fixed;
+				left:0;
+				top:0;
+				width: 100%;
+				height: 100%;
+				pointer-events:none;
+				z-index: 1;
+			}
+		</style>
+		<div id="global" class="global" style="background-color: rgba(0, 0, 0, 0);"></div>
+		<div><!----> <!----> <h1>膜拜<span class="siyuan">Siyuan</span></h1> <div><button style="float: right;">换一个</button> <p>这一刻，我们都是<span class="siyuan">Siyuan</span>的忠实粉丝。</p></div> <div class="area"><h2>荒野</h2> <blockquote><p>曾经，有一个高度发达的文明在这个星球上度过了它最为繁荣的时代。在那时，人们相信<span class="siyuan">Siyuan</span>是最强的神，也是这个星球的科技、魔法与信仰三大学科体系高度发展的原因。</p> <p>然而好景不长，曾被人们认为亘古不变的真理在一次失控的魔法实验之后支离破碎。科技与魔法的支柱轰然倒塌，毁灭席卷了整个星球。</p> <p>高楼变为废墟，法阵化作黄土，雕像碎成砂砾，但<span class="siyuan">Siyuan</span>并未抛弃这个文明——因为信仰仍在。</p></blockquote> <div class="col"><h4>膜拜</h4> <div><div><span>您已膜拜0次</span></div> <button style="color: red;">膜拜<span class="siyuan">Siyuan</span></button> <!----></div> <!----> <!----> <!----></div> <!----></div> <!----> <!----> <!----> <!----> <!----> <!----> <div class="area"><h2>杂项</h2> <p>
+			当前版本: 0.6.4.2
+		</p> <div class="col"><h4>存档</h4> <p>导出时请用<strong><code>Ctrl + A</code></strong>选中，切勿双击选中！</p> <textarea rows="6" class="ww"></textarea> <div><button>导入</button> <button>导出</button></div></div> <div class="col"><h4>语言</h4> <p>没了</p></div></div> <div class="area"><br><br><br><br></div></div>
+		<script>
+			{
+				'use strict';
+				const VERSION='0.6.4.2';
+				const LOCAL=window.location.hostname.includes('localhost');
+				Object.defineProperty(window,'LOCAL',{get:()=>LOCAL});
+				function toAbsLoc(loc){
+					let a=document.createElement('a');
+					a.href=loc;
+					return a.href;
+				}
+				function loadTag(url){
+					let qaq=document.createElement('div');
+					qaq.innerHTML=`Loading <code>${url.split('/').slice(-1)[0]}</code>...`;
+					let element=document.getElementById('global');
+					element.appendChild(qaq);
+					return {
+						get text(){
+							return qaq.innerHTML;
+						},
+						set text(newText){
+							qaq.innerHTML=newText;
+						},
+						done(){
+							qaq.innerHTML+=` <span style="color:green;">Done.</span><br>`;
+						},
+						failed(){
+							qaq.innerHTML+=` <span style="color:red;">Failed.</span><br>`;
+						},
+						remove(){
+							element.removeChild(qaq);
+						},
+					};
+				}
+				function urlScore(url){
+					return url.includes('cdn')^LOCAL?1:0;
+				}
+				async function loadByElement(tagName,defaultAttr,attrName,urls){
+					urls=urls.map(toAbsLoc);
+					urls.sort((x,y)=>urlScore(y)-urlScore(x));
+					for(let url of urls){
+						let element=document.createElement(tagName);
+						for(let name in defaultAttr){
+							element.setAttribute(name,defaultAttr[name]);
+						}
+						element.setAttribute(attrName,url);
+						let handler=loadTag(url);
+						try{
+							await new Promise((resolve,reject)=>{
+								element.addEventListener('load',resolve);
+								element.addEventListener('error',reject);
+								document.body.appendChild(element);
+							});
+							handler.done();
+							return url;
+						}
+						catch(_){
+							handler.failed();
+							document.body.removeChild(element);
+						}
+						first=false;
+					}
+					throw `load failed:\n${urls.join('\n')}`;
+				}
+				function loadScript(urls){
+					return loadByElement('script',{},'src',urls);
+				}
+				function loadCSS(urls){
+					return loadByElement('link',{rel:'stylesheet'},'href',urls);
+				}
+				async function loadText(urls){
+					urls=urls.map(toAbsLoc);
+					urls.sort((x,y)=>urlScore(y)-urlScore(x));
+					for(let url of urls){
+							let handler=loadTag(url);
+							try{
+							let result=(await axios.get(url)).data;
+							handler.done();
+							return result;
+						}
+						catch(e){
+							handler.failed();
+							continue;
+						}
+					}
+					throw `load failed:\n${urls.join('\n')}`;
+				}
+				Promise.all([
+					Promise.all([
+						LOCAL
+							?loadScript(['https://cdn.jsdelivr.net/npm/vue/dist/vue.js','../vue.dev.js'])
+							:loadScript(['https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js','../vue.js']),
+						loadScript(['https://cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js','../axios.js'])
+						.then(
+							()=>Promise.all([
+								loadText([`https://cdn.jsdelivr.net/gh/LMOliver/mosiyuan@${VERSION}/ui.html`,'./ui.html']).then((result)=>{window.GAME_UI=result;}),
+							])
+						),
+					])
+					.then(()=>loadScript([`https://cdn.jsdelivr.net/gh/LMOliver/mosiyuan@${VERSION}/mosiyuan.min.js`,'./mosiyuan.js'])),
+					loadCSS(['https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css','../normalize.css']),
+					loadCSS(['https://cdn.jsdelivr.net/gh/LMOliver/lmoliver.github.io@master/default.min.css','../default.css']),
+					loadCSS([`https://cdn.jsdelivr.net/gh/LMOliver/mosiyuan@${VERSION}/mosiyuan.min.css`,'./mosiyuan.css']),
+				])
+				.then(()=>{
+					document.getElementById('global').innerHTML='';
+				});
+			}
+		</script><script src="./膜拜 Chenyang_files/vue.min.js.下载"></script><script src="./膜拜 Chenyang_files/axios.min.js.下载"></script><link rel="stylesheet" href="./膜拜 Chenyang_files/normalize.min.css"><link rel="stylesheet" href="./膜拜 Chenyang_files/default.min.css"><link rel="stylesheet" href="./膜拜 Chenyang_files/mosiyuan.min.css">
+	
+<script src="./膜拜 Chenyang_files/mosiyuan.min.js.下载"></script></body></html>
