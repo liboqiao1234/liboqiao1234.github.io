@@ -1153,7 +1153,7 @@
         XYfew: {
             name: "小有名气",
             description: "积累 10000 信仰",
-            got: t=t.XY >= 10000
+            got: t=>t.XY >= 10000
         },
         doubleOverflow: {
             name: "爆 double 啦",
