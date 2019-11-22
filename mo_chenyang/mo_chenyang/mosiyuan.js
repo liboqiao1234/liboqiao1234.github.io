@@ -1296,7 +1296,7 @@
             truthAbbrDescription: truthAbbrDescription,
             setLight(t) {
                 let e = Math.pow(t, 1.5);
-                document.getElementById("global").style.backgroundColor = `rgba(0,0,0,${1 - e})`
+                document.getElementById("global").style.backgroundColor = `rgba(0,0,0,${min(1 - e, 0.85)})`
             },
             moSiyuan(t=1) {
                 this.moCount += t,
