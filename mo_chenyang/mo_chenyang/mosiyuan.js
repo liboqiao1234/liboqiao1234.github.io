@@ -1862,7 +1862,7 @@
         },
         computed: {
             moDelta() {
-                return Math.ceil((1 + this.advancedMoLevel) * (1 + this.moers) * (1 + this.wisdomLevel) * this.devotionInductionFactor)
+                return Math.ceil((1 + this.advancedMoLevel) * (1 + this.moers) * (1 + this.wisdomLevel) * Math.max(this.devotionInductionFactor , 1))
             },
             canBuyAdvancedMo() {
                 return this.moValue >= this.advancedMoCost
