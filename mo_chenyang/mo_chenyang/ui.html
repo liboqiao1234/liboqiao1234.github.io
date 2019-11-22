@@ -69,6 +69,9 @@
 				<button v-else @click="sp" :disabled="books&lt;spCost">{{`传教${pnr(spLevel)} [${spCost}本经书]`}}</button>
 				<hint-message :value="spMessage" :update="spMessageUpdate"></hint-message>
 				<div v-if="sping">
+
+					<span v-html="SP_PROBLEMS[spingProblem.pid][0]"></span>
+					<br>
 					<span v-html="SP_PROBLEMS[spingProblem.pid][1]"></span>
 					<button v-for="(c,id) in spingProblem.chooses" :disabled="c.selected" @click="spAns(id)"
 						style="display: block;" v-html="PCtoString(spingProblem.pid,c)">
