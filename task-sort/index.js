@@ -10,7 +10,7 @@ function getList(){
         a=a+"<li class='list-group-item'><a href='#' class='list_detail' list_id='"+(index+1)+"'> "+value[0]+"</a></li>";
         alert(index+" "+value);
       });
-      $.("#list_show").val(a);
+      $("#list_show").val(a);
       alert("欢迎！今天也要努力哦！"+res.user[0]);
     }
   })
