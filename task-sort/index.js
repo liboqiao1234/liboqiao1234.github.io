@@ -18,5 +18,5 @@ $(document).ready(function(){
   getList();
 });
 $(".list_detail").on("click",function(){
-
+  alert($(this).text());
 });
