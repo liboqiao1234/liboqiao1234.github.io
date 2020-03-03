@@ -19,13 +19,13 @@ function getList(){
 
 $(document).ready(function(){
   getList();
-  // $("body").delegate(".list_detail","click",function(){
-  //   alert("click!");
-  //   alert($(this).text());
-  //   var a=0;
-  //   a=$(this).attr("list_id");
-  //   console.log("click:"+$(this).text());
-  //   $("#now_list").text(data.list[a-1][0]);
-  //   $("#now_list_num").text(data.list[a-1][1]);
-  // });
+});
+$("body").delegate(".list_detail","click",function(){
+  alert("click!");
+  alert($(this).text());
+  var a=0;
+  a=$(this).attr("list_id");
+  console.log("click:"+$(this).text());
+  $("#now_list").text(data.list[a-1][0]);
+  $("#now_list_num").text(data.list[a-1][1]);
 });
