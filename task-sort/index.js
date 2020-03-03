@@ -19,4 +19,5 @@ $(document).ready(function(){
 });
 $(".list_detail").on("click",function(){
   alert($(this).text());
+  console.log("click:"+$(this).text());
 });
