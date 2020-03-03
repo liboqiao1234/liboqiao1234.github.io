@@ -33,19 +33,17 @@ function list_sort(a1,a2){
 $(document).ready(function(){
   getList();
   $("body").delegate(".list_detail","click",function(){
-    alert("click!");
-    alert($(this).text());
     var a=0;
     a=$(this).attr("list_id");
     console.log("click:"+$(this).text());
     $("#now_list").text(data.list[a-1][0]);
     $("#now_list_num").text(data.list[a-1][1]);
     data.list[a-1][2].sort(list_sort);
-    var a="";
+    var aa="";
     $(data.list[a-1][2]).each(function(index,value){
-      a=a+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">"+data.list[a-1][2][index][1]+"<span class='stop_time_span'>截止日期: <b class='stop_time'>"+data.list[a-1][2][index][1]+"</b><input type='checkbox'></span></li>";
+      aa=aa+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">"+data.list[a-1][2][index][1]+"<span class='stop_time_span'>截止日期: <b class='stop_time'>"+data.list[a-1][2][index][1]+"</b><input type='checkbox'></span></li>";
     });
-    $("#now_list_detail").html(a);
+    $("#now_list_detail").html(aa);
 
 
   });
