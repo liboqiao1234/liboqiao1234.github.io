@@ -20,7 +20,7 @@ function getList(){
 $(document).ready(function(){
   getList();
 });
-$(".list_detail").click(function(){
+$(body).delegate(".list_detail","click",function(){
   alert("click!");
   alert($(this).text());
   var a=0;
