@@ -41,7 +41,7 @@ $(document).ready(function(){
     data.list[a-1][2].sort(list_sort);
     var aa="";
     $(data.list[a-1][2]).each(function(index,value){
-      aa=aa+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">"+data.list[a-1][2][index][1]+"<span class='stop_time_span'>截止日期: <b class='stop_time'>"+data.list[a-1][2][index][1]+"</b><input type='checkbox'></span></li>";
+      aa=aa+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">"+data.list[a-1][2][index][0]+"<span class='stop_time_span'>截止日期: <b class='stop_time'>"+data.list[a-1][2][index][1]+"</b><input type='checkbox'></span></li>";
     });
     $("#now_list_detail").html(aa);
 
