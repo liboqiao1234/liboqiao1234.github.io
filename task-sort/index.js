@@ -27,5 +27,9 @@ $(document).ready(function(){
     console.log("click:"+$(this).text());
     $("#now_list").text(data.list[a-1][0]);
     $("#now_list_num").text(data.list[a-1][1]);
+    var a="";
+    $(data.list[a-1][2]).each(function(index,value){
+      a=a+"a"
+    });
   });
 });
