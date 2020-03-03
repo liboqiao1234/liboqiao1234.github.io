@@ -41,10 +41,12 @@ $(document).ready(function(){
     $("#now_list").text(data.list[a-1][0]);
     $("#now_list_num").text(data.list[a-1][1]);
     data.list[a-1][2].sort(list_sort);
-    // var a="";
-    // $(data.list[a-1][2]).each(function(index,value){
-    //   a=a+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">";
-    // });
+    var a="";
+    $(data.list[a-1][2]).each(function(index,value){
+      a=a+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">"+data.list[a-1][2][index][1]+"<span class='stop_time_span'>截止日期: <b class='stop_time'>"+data.list[a-1][2][index][1]+"</b><input type='checkbox'></span></li>";
+    });
+    $("#now_list_detail").html(a);
+
 
   });
 });
