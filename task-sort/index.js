@@ -16,7 +16,19 @@ function getList(){
   })
 };
 
-
+function list_sort(a1,a2){
+  if(a1[1]<a2[1]){
+    return -1;
+  }else if(a1[1]>a2[1]){
+    return 1;
+  }else{
+    if(a1[2]<a2[2]){
+      return 1;
+    }else{
+      return -1;
+    }
+  }
+}
 $(document).ready(function(){
   getList();
   $("body").delegate(".list_detail","click",function(){
@@ -27,9 +39,11 @@ $(document).ready(function(){
     console.log("click:"+$(this).text());
     $("#now_list").text(data.list[a-1][0]);
     $("#now_list_num").text(data.list[a-1][1]);
-    var a="";
-    $(data.list[a-1][2]).each(function(index,value){
-      a=a+"a"
-    });
+    data.list[a-1][2].sort(list_sort(a1,a2));
+    // var a="";
+    // $(data.list[a-1][2]).each(function(index,value){
+    //   a=a+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">";
+    // });
+
   });
 });
