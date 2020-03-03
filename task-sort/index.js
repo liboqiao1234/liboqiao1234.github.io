@@ -17,6 +17,6 @@ function getList(){
 $(document).ready(function(){
   getList();
 });
-$(".list_detail").onclick(function(){
-  
+$(".list_detail").on("click",function(){
+
 });
