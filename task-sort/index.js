@@ -17,6 +17,7 @@ function getList(){
 };
 
 function list_sort(a1,a2){
+  console.log(a1);
   if(a1[1]<a2[1]){
     return -1;
   }else if(a1[1]>a2[1]){
