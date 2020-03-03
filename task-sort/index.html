@@ -1,0 +1,76 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>任务管理清单_by_UUQ</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <br>
+    <div class="container visible-md visible-lg"><!--电脑、平板端 -->
+      <h2>计划管理系统</h2>
+      <div class="row">
+        <div class="col-lg-3 col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <b>个人信息</b>
+            </div>
+            <div class="panel-body">
+              <p>昵称:&nbsp<span id="nick_name">Guest</span></p>
+              <ul>
+                <li>清单数:<b id="list_number">0</b></li>
+                <li>当前总任务数:<b id="task_number">0</b></li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">我的清单 (<b id="list_number">0</b>)</h3>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item"><span class="badge">上次使用</span><a href="#" class="list_detail" list_id="1">test</a></li>
+              <li class="list-group-item"><a href="#" class="list_detail" list_id="2">test2</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9">
+          <div class="panel panel-default" id="detail_div">
+            <div class="panel-heading">
+              <h3 class="panel-title"><b id="now_list">当前清单 </b> (<b id="now_list_num">0</b>)</h3>
+            </div>
+            <div class="panel-body">
+              <ol class="list-group">
+                <li class="list-group-item todo_items">待办事项1<span class="stop_time_span">截止日期: <b class="stop_time">2020.3.2 18:30</b></span></li>
+                <li class="list-group-item todo_items">待办事项2<span class="stop_time_span">截止日期: <b class="stop_time">2020.3.3 14:00</b></span></li>
+              </ol>
+              <br><br>
+              <div>
+                <form class="form-inline" role="form">
+                  <div class="form-group col-md-12 col-lg-12">
+                    <input type="text" class="form-control" placeholder="请输入待办事项...">
+                    <input type="text" class="form-control" placeholder="请输入截止时间...">
+                    <input type="text" class="form-control" placeholder="重要程度(1-5)">
+                    <button type="button" class="btn btn-success pull-right">增加</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+                <button type="button" class="output_button btn btn-success">导出</button>
+                <button type="button" class="input_button btn btn-info">导入</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container visible-sm visible-xs"><!-- 小设备-->
+
+    </div>
+  </body>
+</html>
