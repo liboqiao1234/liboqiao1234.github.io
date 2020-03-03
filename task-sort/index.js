@@ -8,7 +8,7 @@ function getList(){
       $("#nick_name").text(res.user[0]);
       var a="";
       $(data.list).each(function(index,value){
-        a=a+"<li class='list-group-item'><span class='badge'>"+value[1]+"<a href='#' class='list_detail' list_id="+(index+1)+"> "+value[0]+"</a></li>";
+        a=a+"<li class='list-group-item'><span class='badge'>"+value[1]+"</span>"+"<a href='#' class='list_detail' list_id="+(index+1)+"> "+value[0]+"</a></li>";
       });
       $("#list_show").html(a);
       alert("欢迎！今天也要努力哦！"+res.user[0]);
