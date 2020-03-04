@@ -7,6 +7,7 @@ importance=input("请输入重要程度:")
 old=json.load(open("E:/workspace/mygithubio/liboqiao1234.github.io/task-sort/data.json","r",encoding="UTF-8"))
 data=[name,time,importance]
 old["list"][num-1][2].append(data)
+old["list"][num-1][1]=old["list"][num-1][1]+1
 json_str=json.dumps(old,ensure_ascii=False)
 with open("E:/workspace/mygithubio/liboqiao1234.github.io/task-sort/data.json","w",encoding="utf-8") as file_obj:
     file_obj.write(json_str)

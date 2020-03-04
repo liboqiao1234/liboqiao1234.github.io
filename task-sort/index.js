@@ -44,7 +44,8 @@ $(document).ready(function(){
       aa=aa+"<li class='list-group-item todo_items' importance="+data.list[a-1][2][index][2]+">"+data.list[a-1][2][index][0]+"<span class='stop_time_span'>截止日期: <b class='stop_time'>"+data.list[a-1][2][index][1]+" </b><input type='checkbox'></span></li>";
     });
     $("#now_list_detail").html(aa);
-
+    $("#detail_div").attr("style","");
+    $("#default_detail").hide();
 
   });
 });
