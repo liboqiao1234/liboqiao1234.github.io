@@ -24,6 +24,8 @@ def finish():
     nn=0
     while nn!=-1:
         nn=int(input("请输入完成的清单编号\n"))
+        if(nn==-1):
+            break
         mm=int(input("请输入序号\n"))
         del old["list"][nn-1][2][mm-1]
         old["list"][nn-1][1]=old["list"][nn-1][1]-1
