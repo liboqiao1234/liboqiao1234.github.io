@@ -16,9 +16,11 @@ def add():
 def finish():
     old=json.load(open("E:/workspace/mygithubio/liboqiao1234.github.io/task-sort/data.json","r",encoding="UTF-8"))
     for i in range(0,old["user"][1]):
-        for j in range(0,old["list"][i][1]):
-            print(old["list"][i][2][j][0],old["list"][i][2][j][1])
         print("清单",i)
+        for j in range(0,old["list"][i][1]):
+            print(j,end=":")
+            print(old["list"][i][2][j][0],old["list"][i][2][j][1])
+    
     json_str=json.dumps(old,ensure_ascii=False) 
     with open("E:/workspace/mygithubio/liboqiao1234.github.io/task-sort/data.json","w",encoding="utf-8") as file_obj:
         file_obj.write(json_str)
