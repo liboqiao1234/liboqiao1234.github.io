@@ -10,7 +10,8 @@
         $("#sub").on("click",function(){
           alert("sending");
           var urll=$("#url").val();
-          var d={"msgtype":"text","text":{"content":"test"}};
+          var tt=$("#text").val();
+          var d={"msgtype":"text","text":{"content":tt}};
           $.ajax({
             url:urll,
             data:d,
