@@ -9,7 +9,7 @@
       $(document).ready(function(){
         $("#sub").on("click",function(){
           alert("sending");
-          var urll=$("#url").value();
+          var urll=$("#url").val();
           var d={"msgtype":"text","text":{"content":"test"}};
           $.ajax({
             url:urll,
