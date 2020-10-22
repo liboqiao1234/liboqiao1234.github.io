@@ -11,9 +11,10 @@
           alert("sending");
           var urll=$("#url").val();
           var tt=$("#text").val();
-          var d={"msgtype":"text","text":{"content":tt}};
+          var d='{"msgtype":"text","text":{"content":tt}}';
           console.log(d);
           $.ajax({
+            contentType: "application/json",
             url:urll,
             data:d,
             type:"POST"
