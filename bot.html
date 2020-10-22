@@ -7,10 +7,9 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(
-        $("#sub").click(function(){
+        $("#sub").on("click","#sub",function(){
           var urll=$("#url").value();
           var d={"msgtype":"text","text":{"content":"test"}};
-
           $.ajax({
             url:urll,
             data:d,
