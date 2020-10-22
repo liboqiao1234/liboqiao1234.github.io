@@ -6,8 +6,8 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(
-        $("#sub").on("click","#sub",function(){
+      $(document).ready(function(){
+        $("#sub").on("click",function(){
           alert("sending");
           var urll=$("#url").value();
           var d={"msgtype":"text","text":{"content":"test"}};
@@ -17,6 +17,7 @@
             type:POST
           });
         });
+        }
       );
     </script>
   </head>
