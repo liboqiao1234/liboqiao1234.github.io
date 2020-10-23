@@ -12,18 +12,11 @@
           var tt=$("#text").val();
           var mention=$("#member").val().split(" ");
           var d='{"msgtype":"text","text":{"content":'+'"'+tt+'",'+'"'+'memtioned_list'+'":'+'[';
-          console.log(d);
-          // forEach((memtion, i) => {
           mention.forEach(function(value,index){
              d=d+'"'+value+'",';
-             console.log("123123");
           })
-          // });
-
-          // var str=;
           d=d+']'+'}}';
           console.log(d);
-          return ;
           $.ajax({
             url:urll,
             data:d,
