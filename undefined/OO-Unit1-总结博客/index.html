@@ -140,10 +140,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://yoursite-url/undefined/Study-List/">
+  <link rel="canonical" href="http://yoursite-url/undefined/OO-Unit1-总结博客/">
   <title>
     
-      Study List - UUQ&#39;s Blog
+      OO Unit1 总结博客 - UUQ&#39;s Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -391,14 +391,14 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#TODO, 学习记录" title="TODO, 学习记录">TODO, 学习记录</a>
+              <a class="tag" href="/tags/#面向对象 Java" title="面向对象 Java">面向对象 Java</a>
               
             </div>
-            <h1>Study List</h1>
+            <h1>OO Unit1 总结博客</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
               Posted by UUQ on
-              2024-03-25
+              2024-03-28
             </span>
 
 
@@ -406,11 +406,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">1</span> Minutes
+              Estimated Reading Time <span class="post-count">13</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">141</span> In Total
+              Words <span class="post-count">3.5k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -472,46 +472,729 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <h1>To Read List</h1>
-<p>[TOC]</p>
-<h2 id="紧急">紧急</h2>
-<p>时间序列数据分析&amp;VAR模型&amp;VAR模型 （SV-TVP-SVAR)</p>
-<h2 id="经济学">经济学</h2>
-<h3 id="计量工具与模型">计量工具与模型</h3>
-<p>Probit &amp; Logit回归</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/513059543">RD 断点回归</a></p>
-<p>PSM</p>
-<p>DID</p>
-<p>IV工具变量 &amp; 中介效应</p>
-<p>GMM高斯混合模型</p>
-<h3 id="经济理论框架-效应-传导机制">经济理论框架&amp;效应&amp;传导机制</h3>
-<p>挤出效应</p>
-<p>财富效应</p>
-<p>现代货币数量论</p>
-<p>货币传导机制</p>
-<p>DSGE模型</p>
-<p>离岸货币</p>
-<p>表外融资</p>
-<p>利率市场化</p>
-<h2 id="生命科学">生命科学</h2>
-<p>《分子生物学》</p>
-<h2 id="机器学习">机器学习</h2>
-<p>注意力机制</p>
-<h2 id="未分类">未分类</h2>
-<p>反事实推理</p>
+        <h1>一、架构分析</h1>
+<hr>
+<h2 id="1-架构概览">1. 架构概览</h2>
+<p>在本节中，将对最后一次迭代（hw3）的项目进行分析，先在此简单描述一下<strong>我的思路</strong>：</p>
+<ol>
+<li>解析并存储<strong>自定义函数</strong>（UDF）</li>
+<li>去除输入表达式<strong>空格和\t</strong>，<strong>递归</strong>地进行<strong>字符串替换</strong>掉函数调用</li>
+<li>对2中得到的表达式<strong>边解析边化简</strong>，得到最终表达式</li>
+<li>输出结果</li>
+</ol>
+<p>因此整体架构可以被分为两部分：<strong>解析、预处理部分</strong> 以及 <strong>存储、化简部分</strong>，前者对应Parser、Lexer、UDF相关类，后者对应Expr、Term、Factor等相关类。</p>
+<p>在最终的架构中，我从<strong>存算分离</strong>架构调整为了<strong>存算一体</strong>的架构，但本质上，解析和化简功能还是可以分开的。下面将分别进行介绍。</p>
+<h2 id="2-项目架构-类图">2. 项目架构-类图</h2>
+<p>该类图中省略了一些基本的内容，主要体现类之间的关系和一些核心功能的实现:<br>
+<br><br>
+<img src="https://img-blog.csdnimg.cn/direct/2f66f5c56bd34eaba69aae2c579fc79e.png#pic_center" alt="UML图"></p>
+  <center><small>使用PlantUML工具编辑绘制的UML图</small></center>
+<h2 id="3-类设计思路阐释">3. 类设计思路阐释</h2>
+<h3 id="1-预处理和整体思路">(1) 预处理和整体思路</h3>
+<p>对于Parser、Lexer部分的设计和training提供的思路类似，即使用递归下降的方法，通过Lexer对字符串进行token提取，由Parser对token进行识别和解析，完成存储，这里就不过多展开。</p>
+<p>对于UDF（函数）的存储，设计了UDF类，</p>
+<p>为了对UDF输入进行解析，设计了<strong>UdfParser</strong>类，实际上和Parser关联不强，只是也使用了Lexer进行token分割和提取，对于自定义函数进行<strong>名称、形参、表达式的识别和存储</strong>，生成UDF。</p>
+<h3 id="2-存储-计算">(2) 存储&amp;计算</h3>
+<p>这部分是比较核心的地方，大架构参考training的<strong>Expr-Term-Factor</strong>的三层结构，设计<strong>Factor接口</strong>让Expr完成implement，以实现表达式套表达式的括号嵌套。</p>
+<p>Factor接口定义了因子的三个共同行为，分别是<strong>求导</strong>、<strong>转换为表达式</strong>、<strong>化简</strong>，共有四个实现，即<strong>Number</strong>（常量）、<strong>VarFactor</strong>（对应x^a）、<strong>Expr</strong>（表达式因子）、<strong>Expo</strong>（对应exp()）</p>
+<p>每个底层因子都很直观地按照形式化表述的定义设计，通过calc和toExpr和d这三个接口中规定的方法，<strong>把add和mul都通过Expr类进行实现，减少了实现其他类之间加&amp;乘运算的代码量。</strong></p>
+<h2 id="4-用数据说话——基于统计结果的分析">4. 用数据说话——基于统计结果的分析</h2>
+<p>使用IDEA插件Statistic，得到各个类的规模（代码行数、方法个数）</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Source Code Lines</th>
+<th>方法个数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Factor</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr>
+<td>UdfParser</td>
+<td>25</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>25</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Expo</td>
+<td>28</td>
+<td>6</td>
+</tr>
+<tr>
+<td>VarFactor</td>
+<td>29</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Lexer</td>
+<td>43</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Udf</td>
+<td>46</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Term</td>
+<td>87</td>
+<td>12</td>
+</tr>
+<tr>
+<td>MainClass</td>
+<td>80</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Parser</td>
+<td>136</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Expr</td>
+<td>301</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到Expr类的代码行数最多，因为Expr不仅是最终得出答案的最大容器，同时也是因为架构设计时，对于不同Factor的加乘运算都在Expr进行（使用toExpr后mul，或者使用Expr的addST）。</p>
+<p>方法数量较多是因为对于每种Factor或Term、Expr，都<strong>设计了多种构造函数</strong>，虽然可能看起来比较冗余，但是这样<strong>易于扩展，使得代码可读性增强</strong>。例如在VarFactor的构造函数就有传入int类、传入BigInteger类的两种构造函数。</p>
+<p>使用IDEA插件Metric Reloaded，分别计算出各个方法的圈复杂度</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>CogC</th>
+<th>ev(G)</th>
+<th>iv(G)</th>
+<th>v(G)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expo.Expo(Expr)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expo.Expo(Factor)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expo.calc()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expo.d()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expo.getUp()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expo.toExpr()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expr.Expr()</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Expr.Expr(Factor)</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Expr.add(Expr)</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Expr.addST(Term)</td>
+<td>7</td>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Expr.addTerm(Term)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expr.calc()</td>
+<td><strong>10</strong></td>
+<td>3</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Expr.compareTo(Expr)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expr.copy()</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Expr.d()</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Expr.isFactor()</td>
+<td>8</td>
+<td>6</td>
+<td>7</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Expr.mul1(Expr)</td>
+<td><strong>16</strong></td>
+<td>6</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Expr.toAns()</td>
+<td><strong>34</strong></td>
+<td>4</td>
+<td>15</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Expr.toAnsFir()</td>
+<td><strong>28</strong></td>
+<td>4</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Expr.toAnsIn()</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Expr.toExpr()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Expr.toString()</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Lexer.Lexer(String)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Lexer.getNumber()</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Lexer.getRem()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Lexer.getToken()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Lexer.next()</td>
+<td>6</td>
+<td>2</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>MainClass.main(String[])</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>MainClass.pre(String)</td>
+<td><strong>48</strong></td>
+<td>8</td>
+<td>13</td>
+<td>17</td>
+</tr>
+<tr>
+<td>Number.Number(int)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Number.Number(int, BigInteger)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Number.calc()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Number.d()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Number.getValue()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Number.toExpr()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Parser.Parser(Lexer)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Parser.getLexer()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Parser.parseDX()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Parser.parseEF()</td>
+<td>8</td>
+<td>4</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Parser.parseEP()</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Parser.parseExpr()</td>
+<td>8</td>
+<td>1</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Parser.parseFactor()</td>
+<td><strong>11</strong></td>
+<td>5</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Parser.parseTerm(int)</td>
+<td>3</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Parser.parseVF()</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Term.Term()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.Term(BigInteger, BigInteger, Expr)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.Term(Factor)</td>
+<td>4</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Term.addFactor(Factor)</td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Term.addPow(BigInteger)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.calc()</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Term.d()</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Term.getFlag()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.getPow()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.getPowE()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.mulFlag(BigInteger)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Term.mulFlag(int)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Udf.Udf(String, ArrayList<String>,  String)</String></td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Udf.calc()</td>
+<td>7</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Udf.call(ArrayList<String>)</String></td>
+<td>4</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Udf.getName()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Udf.getNum()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>UdfParser.CreateUdf()</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>UdfParser.UdfParser(Lexer)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>UdfParser.UdfParser(Lexer,  HashMap&lt;String, Udf&gt;)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VarFactor.VarFactor(BigInteger)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VarFactor.VarFactor(int)</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VarFactor.calc()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VarFactor.d()</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>VarFactor.getPow()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VarFactor.toExpr()</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>compare(Pair&lt;BigInteger, Expr&gt;,  Pair&lt;BigInteger, Expr&gt;)</td>
+<td>2</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到圈复杂度高的方法主要有Main的pre方法、Expr的两个toAns方法和Expr的mul1方法，pre方法解析str中的自定义函数、两个toAns方法是最终输出（第一项和其他项），因此有很多分支。mul1方法实现了两个Expr的乘法，涉及判0和一些其他事宜，复杂度较高，而<strong>其他方法圈复杂度都小于10，整体复杂性可以接受</strong>。</p>
+<p>而对于每个Class，我们也有：</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>OCavg</th>
+<th>OCmax</th>
+<th>WMC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expo</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Expr</td>
+<td>3.89</td>
+<td>15</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Lexer</td>
+<td>2.2</td>
+<td>6</td>
+<td>11</td>
+</tr>
+<tr>
+<td>MainClass</td>
+<td>7.5</td>
+<td>13</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>1</td>
+<td>1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Parser</td>
+<td>3.56</td>
+<td>7</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Term</td>
+<td>1.75</td>
+<td>5</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Udf</td>
+<td>2</td>
+<td>4</td>
+<td>10</td>
+</tr>
+<tr>
+<td>UdfParser</td>
+<td>1.33</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>VarFactor</td>
+<td>1.17</td>
+<td>2</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到WMC（加权方法复杂度）同样聚集在Expr类，其次是Parser，这和架构设计和功能特性关联很强。</p>
+<h1>二、迭代</h1>
+<h2 id="1-架构演化">1. 架构演化</h2>
+<h3 id="第一次作业-——-存算分离的典型">第一次作业 —— 存算分离的典型</h3>
+<p>第一次作业由于内容较少，而且training和OOLens都提供了递归下降的解读和示例，因此可能大家的设计主要分为两类——<strong>存算一体和存算分离</strong>，我最开始为了方便理清思路、便于调试，使用了后者，同时明确了使用基本项（a*x^b）和基本项构成的加法多项式存储结果。</p>
+<p>但实际上先解析再计算架构为了区分两个过程，我认为<strong>最好设计单独的基本项和多项式类</strong>，不要在化简时直接复用解析时使用的Expr，但我觉得其实差不多所以没有分开，开发过程中确实思路上和实现时产生了一些困扰。</p>
+<h3 id="第二次作业-——-缝缝补补和一些动摇">第二次作业 —— 缝缝补补和一些动摇</h3>
+<p>第二次作业允许了括号嵌套，新增了指数因子和自定义函数。前者实际上递归下降方法本身就支持多层括号，而新增指数因子只需要新增一个Expo类，自定义函数经过严谨论证如果不考虑效率（即函数表达式和形参的化简）直接使用字符串替换即可，因此架构只会增添，不会太改变。</p>
+<p>但是我担心我的存算分离架构在括号过多的时候可能运行效率不佳，因此在解析表达式因子的时候也调用了Expr.calc()进行计算，但最外一层仍需要最后调用calc，此时我的架构处于一个不太明确的状态，也可能导致重复运算，但由于细节处理得当，整体运行速度允许有这样的冗余。</p>
+<p>基本功能实现了，但是为了性能分肯定要做基本的合并同类项——这时候判断exp上面的expr是否相等就要花头脑了。为此我对Expr的存储顺序进行了规定，保证toString后结果唯一，用字符串判断。这时候由于没有单独的Poly类导致写起来确实有点麻烦。</p>
+<h3 id="第三次作业">第三次作业</h3>
+<p>第三次作业加的内容不多，就是求导和自定义函数嵌套。求导只需要先化简内部表达式或因子，在每一层都实现求导，再实现乘法规则即可，自定义函数嵌套由于字符串替换的递归实现，所以无需做出什么改变。</p>
+<p>整体架构没有发生什么变化。</p>
+<p>可见我的架构实际上比较清晰，类的数量较少，比较轻量级，但每个类的功能不够单一，部分类的代码量大，导致迭代和维护相对困难。</p>
+<h2 id="2-迭代情景假设——三角函数">2. 迭代情景假设——三角函数</h2>
+<p>新增三角函数的话，因为cos和sin之间可以相互转化，所以只需要新增实现Factor接口的sin类，在Parser和Lexer部分相应修改。</p>
+<p>对应的，基本项需要扩充为a<em>x^b</em>exp(Expr)*sin(Expr)，化简仍然依靠Expr的toString比较sin里面是否相同。</p>
+<h1>三、本地测试、强测、互测和性能优化</h1>
+<h2 id="1-我的“Bug”们">1. 我的“Bug”们</h2>
+<p>在第一次作业中，为了实现更好的性能分，我试图将正项提前以减少一个加号，但是写的时候对于0项的处理没有弄好，之前的逻辑是在化简的时候保证0不出现，因此输出没有考虑0的部分，但是在优化了部分逻辑、新增正向提前后，前面化简的时候有个部分忘记去除了0项，导致<strong>输出错误</strong>，十分可惜。</p>
+<p>这个惨痛的教训让我意识到：一个功能在可以做的时候就要做好，即使增加冗余也比出错好，这样就可以使自己的程序更加robust，而不是试图依赖上下游的处理，一个不小心就弄出问题。这次出现bug的方法<strong>圈复杂度较高、代码行数也高</strong>，因此<strong>很容易考虑不周到，导致一个疏忽就犯了错</strong>，但由于为了追求输出更短，其代码逻辑本身就很琐碎，因此我尝试了增加容错和冗余的方法保证正确性。</p>
+<p>在第三次作业中，互测<strong>被卡了TLE</strong>。因为之前没考虑TLE的事情（毕竟已经边化简边解析了，不会被很简单的1-1的一堆次方卡，而且看到强测时间给的很长），所以很多可以优化效率的地方没有实现，而且增加了一些容错和冗余（比如输出前再计算一次），结果就被卡了。最终分析后，我发现在exp合并的时候，Expr的toString会花费很多时间，而实际上Expr如果不改变是<strong>不需要多次toString</strong>的，于是在对Expr的toString<strong>记忆化处理</strong>后，顺利通过bug修复。</p>
+<h2 id="2-测试方法与互测">2. 测试方法与互测</h2>
+<p>主要以跑评测机为主，随机生成数据、使用同学们的评测机等，但随机的话其实数据很弱，很难生成出bug，而且互测中即使使用评测机生成出bug数据后还需要手动化简为符合cost的结果，因此手动构造一些极端情况、边界情况的数据也很必要。</p>
+<p>另外也会通过粗略分析对方代码架构的方式，有针对性地进行数据设计，有些同学会无脑先做n次方再进行化简，这时候1-1+x的n次方就会让他算得很多导致TLE等等。</p>
+<h2 id="长度优化与效率优化">长度优化与效率优化</h2>
+<p>上文提到过，关于长度优化，最基础的合并同类项（第二次以后通过Expr有序toString进行判断）、正项提前（这一项导致输出逻辑变得更长了，因此我特意将输出第一项单独实现了一个方法（toAnsFir），试图使得方法简单可读性强）外，没有进行额外优化（担心时间复杂度变得很坏，以及有时候提取公因数还不如不提）。</p>
+<p>而效率优化主要是在计算前先保证内部已经化简（用change的Tag进行记忆化），以及toString的时候通过记忆化，减少了无意义的重复运算。这些优化对于各个方法复杂度几乎没有影响。</p>
+<h1>四、心得体会</h1>
+<p>OO正课相比OOpre可谓不是一个层级的，第一单元的学习也让我收获颇丰，不仅是简单的写代码速度提升，更是对于写代码之前，对于简洁高效的架构设计以及预判未来拓展方向、预留拓展空间的考量提升颇多。这一点在OOpre中只是“听到了老师有讲过”，但是没有在写代码过程中自己感受到。</p>
+<p>另外第一次作业在实现的时候确实有一定的思维难度，不真正下手写一些感觉自己的理解都是虚无缥缈的，边写边深化自己的理解，然后再订正自己的大思路，我觉得这是适合我的方法，因此我也觉得我其实应该在第二次作业的时候进行重构，因为有了新的想法，发现自己之前的设计有缺陷，其实重构是最好的，如果有五六次作业，或者最后一次不是比较简单好实现的求导，那我肯定果断重构了。</p>
+<h1>五、建议</h1>
+<p>第一单元教程很完善，不过我觉得应该在第一次就允许括号套括号，以确保大家对递归下降法的理解比较完善准确。</p>
 
 
         <hr>
         <!-- Pager -->
         <ul class="pager">
           
-          <li class="previous">
-            <a href="/undefined/OO-Unit1-总结博客/" data-toggle="tooltip" data-placement="top" title="OO Unit1 总结博客">&larr; Previous Post</a>
-          </li>
-          
           
           <li class="next">
-            <a href="/undefined/3-24-study/" data-toggle="tooltip" data-placement="top" title="3.24 study">Next Post &rarr;</a>
+            <a href="/undefined/Study-List/" data-toggle="tooltip" data-placement="top" title="Study List">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -560,7 +1243,7 @@
       </a>
     </li>
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=Study List&body=Hi,I found this website and thought you might like it http://yoursite-url/undefined/Study-List/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=OO Unit1 总结博客&body=Hi,I found this website and thought you might like it http://yoursite-url/undefined/OO-Unit1-总结博客/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -594,7 +1277,7 @@
       repo: '',
       owner: '',
       admin: '',
-      id: 'Mon Mar 25 2024 00:33:21 GMT+0800', // Ensure uniqueness and length less than 50
+      id: 'Thu Mar 28 2024 10:26:24 GMT+0800', // Ensure uniqueness and length less than 50
       distractionFreeMode: false, // Facebook-like distraction free mode
       perPage: 10,
       pagerDirection: 'last',
@@ -647,7 +1330,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">To Read List</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%B4%A7%E6%80%A5"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">紧急</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%BB%8F%E6%B5%8E%E5%AD%A6"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">经济学</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%AE%A1%E9%87%8F%E5%B7%A5%E5%85%B7%E4%B8%8E%E6%A8%A1%E5%9E%8B"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">计量工具与模型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BB%8F%E6%B5%8E%E7%90%86%E8%AE%BA%E6%A1%86%E6%9E%B6-%E6%95%88%E5%BA%94-%E4%BC%A0%E5%AF%BC%E6%9C%BA%E5%88%B6"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">经济理论框架&amp;效应&amp;传导机制</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">生命科学</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">机器学习</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%9C%AA%E5%88%86%E7%B1%BB"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">未分类</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">一、架构分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%A7%88"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. 架构概览</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84-%E7%B1%BB%E5%9B%BE"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. 项目架构-类图</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF%E9%98%90%E9%87%8A"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3. 类设计思路阐释</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">(1) 预处理和整体思路</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%AD%98%E5%82%A8-%E8%AE%A1%E7%AE%97"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">(2) 存储&amp;计算</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-%E7%94%A8%E6%95%B0%E6%8D%AE%E8%AF%B4%E8%AF%9D%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E7%BB%93%E6%9E%9C%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">4. 用数据说话——基于统计结果的分析</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">二、迭代</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1. 架构演化</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E5%AD%98%E7%AE%97%E5%88%86%E7%A6%BB%E7%9A%84%E5%85%B8%E5%9E%8B"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">第一次作业 —— 存算分离的典型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E7%BC%9D%E7%BC%9D%E8%A1%A5%E8%A1%A5%E5%92%8C%E4%B8%80%E4%BA%9B%E5%8A%A8%E6%91%87"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">第二次作业 —— 缝缝补补和一些动摇</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">第三次作业</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E8%BF%AD%E4%BB%A3%E6%83%85%E6%99%AF%E5%81%87%E8%AE%BE%E2%80%94%E2%80%94%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2. 迭代情景假设——三角函数</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">三、本地测试、强测、互测和性能优化</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%88%91%E7%9A%84%E2%80%9CBug%E2%80%9D%E4%BB%AC"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1. 我的“Bug”们</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E4%B8%8E%E4%BA%92%E6%B5%8B"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2. 测试方法与互测</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%95%BF%E5%BA%A6%E4%BC%98%E5%8C%96%E4%B8%8E%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">长度优化与效率优化</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">四、心得体会</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">五、建议</span></a></li></ol>
         
         </div>
       </aside>
@@ -670,7 +1353,7 @@
           </h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#TODO, 学习记录" title="TODO, 学习记录">TODO, 学习记录</a>
+            <a class="tag" href="/tags/#面向对象 Java" title="面向对象 Java">面向对象 Java</a>
             
           </div>
         </section>
@@ -867,7 +1550,7 @@
     let jsdelivr = "https://cdn.jsdelivr.net/gh/";
     let gh = "liboqiao1234";
     let ghPages = gh + ".github.io";
-    let pagePath = "undefined/Study-List/";
+    let pagePath = "undefined/OO-Unit1-总结博客/";
     let jsdelivrurl;
     if (pagePath.indexOf("index.html") != -1) {
       jsdelivrurl = jsdelivr + gh + "/" + ghPages;
