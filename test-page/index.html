@@ -151,7 +151,7 @@
 
 <!-- hack iOS CSS :active style -->
 
-	<body ontouchstart="" class="body--light body--dark">
+	<body ontouchstart="" class="body--light body--light">
 
 
 		<!-- ThemeColor -->
@@ -185,7 +185,7 @@
       ? b.pop()
       : '';
   }
-  let themeMode = 'dark';
+  let themeMode = 'light';
   if (getCookieValue('sb-color-mode') && (getCookieValue('sb-color-mode') !== themeMode)) {
     let dbody = document.body.classList;
     themeMode === 'dark' ? dbody.remove('body--dark') : dbody.add('body--dark');
@@ -365,10 +365,6 @@
       
     }
 
-    
-      #signature {/*signature*/
-        background-image: url('/img/signature/vincent-white.png');
-      }
     
   </style>
   <!-- CDN: jsdelivr end -->
@@ -825,6 +821,10 @@ $$</p>
   
 
   
+    <!-- Line start -->
+    <script async="text/javascript" src="https://cdn.jsdelivr.net/gh/liboqiao1234/liboqiao1234.github.io/js/line.js"></script>
+    <!-- Line end -->
+  
 
 
 
@@ -1135,7 +1135,7 @@ start: '#bbbbee', end: '#0085a1' } }; $('#tag_cloud a').tagcloud(); }) } </scrip
                 }
               });
               // select top N slices in content
-              var upperBound = parseInt('1');
+              var upperBound = parseInt('-1');
               if (upperBound >= 0) {
                 slicesOfContent = slicesOfContent.slice(0, upperBound);
               }
