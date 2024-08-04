@@ -886,7 +886,9 @@
 		item.setAttribute("src", newUrl);
 		console.log("common img with new-url:"+newUrl);
 	  } else {
-		let newUrl = jsdelivr + gh + "/" +ghPages + oldUrl;
+		let tmp = oldUrl.split('/').slice(2);
+		
+		let newUrl = jsdelivr + gh + "/" +ghPages + "/" + tmp;
 		newUrl = newUrl.replace("..","");
 		item.setAttribute("src", newUrl);
 		console.log("blog img with new-url:"+newUrl);

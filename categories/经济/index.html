@@ -451,8 +451,6 @@
               <span>
                 《置身事内》读书记录（后半段）
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -463,8 +461,6 @@
             <a href="/第三章_利用期货的对冲策略/" style="color: #0085a1">
               <span>
                 【期权期货衍生品】第三章 利用期货的对冲策略-未完成
-                
-                -- undefined
                 
               </span>
             </a>
@@ -477,8 +473,6 @@
               <span>
                 【期权期货衍生品】第二章 期货市场与中央交易对手
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -489,8 +483,6 @@
             <a href="/第一章_导论/" style="color: #0085a1">
               <span>
                 【期权期货衍生品】 第一章 导论
-                
-                -- undefined
                 
               </span>
             </a>
@@ -503,8 +495,6 @@
               <span>
                 OS lab6 challenge shell
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -515,8 +505,6 @@
             <a href="/gods-blog/" style="color: #0085a1">
               <span>
                 gods' blog
-                
-                -- undefined
                 
               </span>
             </a>
@@ -529,8 +517,6 @@
               <span>
                 OO_Unit2
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -541,8 +527,6 @@
             <a href="/latest-todo/" style="color: #0085a1">
               <span>
                 latest todo
-                
-                -- undefined
                 
               </span>
             </a>
@@ -555,8 +539,6 @@
               <span>
                 4.1study
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -567,8 +549,6 @@
             <a href="/OO评测机的自动评测脚本——基于DPO的实现/" style="color: #0085a1">
               <span>
                 tmp
-                
-                -- undefined
                 
               </span>
             </a>
@@ -581,8 +561,6 @@
               <span>
                 本学期琐事与课程作业 DDL
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -593,8 +571,6 @@
             <a href="/blog-todoList/" style="color: #0085a1">
               <span>
                 blog-todoList
-                
-                -- undefined
                 
               </span>
             </a>
@@ -607,8 +583,6 @@
               <span>
                 OO Unit1 总结博客
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -619,8 +593,6 @@
             <a href="/Study-List/" style="color: #0085a1">
               <span>
                 Study List
-                
-                -- undefined
                 
               </span>
             </a>
@@ -633,8 +605,6 @@
               <span>
                 3.24 study
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -646,8 +616,6 @@
               <span>
                 在Ubuntu22.04配置Steam++(Watt tool)
                 
-                -- undefined
-                
               </span>
             </a>
           </li>
@@ -658,8 +626,6 @@
             <a href="/test-page/" style="color: #0085a1">
               <span>
                 test page
-                
-                -- undefined
                 
               </span>
             </a>
@@ -1042,7 +1008,9 @@
 		item.setAttribute("src", newUrl);
 		console.log("common img with new-url:"+newUrl);
 	  } else {
-		let newUrl = jsdelivr + gh + "/" +ghPages + oldUrl;
+		let tmp = oldUrl.split('/').slice(2);
+		
+		let newUrl = jsdelivr + gh + "/" +ghPages + "/" + tmp;
 		newUrl = newUrl.replace("..","");
 		item.setAttribute("src", newUrl);
 		console.log("blog img with new-url:"+newUrl);
