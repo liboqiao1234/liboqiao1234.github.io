@@ -1008,7 +1008,7 @@
 		item.setAttribute("src", newUrl);
 		console.log("common img with new-url:"+newUrl);
 	  } else {
-		let tmp = oldUrl.split('/').slice(2);
+		let tmp = oldUrl.split('/').slice(2).join('/');
 		
 		let newUrl = jsdelivr + gh + "/" +ghPages + "/" + tmp;
 		newUrl = newUrl.replace("..","");
