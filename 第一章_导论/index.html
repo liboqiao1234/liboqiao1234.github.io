@@ -856,6 +856,7 @@
     imgUrl.forEach(item => {
 	  let oldUrl = item.getAttribute("src");
 	  console.log("old-img-url:"+oldUrl);
+	  if (oldUrl.indexOf('http://')!==-1 || oldUrl.indexOf('https://')!==-1) continue;
 	  if (oldUrl.indexOf('undefined')!==-1 && oldUrl.indexOf('cn')!==-1 && oldUrl.indexOf('en')!==-1){
 	    // link.indexOf('undefined')!==-1 || link.indexOf('cn')!==-1 || link.indexOf('en')
 		let newUrl = oldUrl.replace(oldUrl, jsdelivrurl + oldUrl).replace("..", "");
