@@ -921,8 +921,13 @@
 		item.setAttribute("src", newUrl);
 		console.log("common img with new-url:"+newUrl);
 	  } else {
-		let tmp = oldUrl.split('/').slice(2).join('/');
-		
+		let tmp;
+		let slices = oldUrl.split('/');
+		if (slices.indexOf('undefined') !== -1){ 
+			tmp = slices.slice(2).join('/');
+		} else {
+			tmp = oldUrl;
+		}
 		let newUrl = jsdelivr + gh + "/" +ghPages + "/" + tmp;
 		newUrl = newUrl.replace("..","");
 		item.setAttribute("src", newUrl);
