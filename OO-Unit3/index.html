@@ -141,10 +141,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://yoursite-url/OO第一单元/">
+  <link rel="canonical" href="http://yoursite-url/OO-Unit3/">
   <title>
     
-      OO第一单元 - UUQ&#39;s Blog
+      OO_Unit3 - UUQ&#39;s Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -375,8 +375,8 @@
               <a class="tag" href="/tags/#OO" title="OO">OO</a>
               
             </div>
-            <h1>OO第一单元</h1>
-            <h2 class="subheading">递归下降</h2>
+            <h1>OO_Unit3</h1>
+            <h2 class="subheading">神TM的JML</h2>
             <span class="meta">
               Posted by UUQ on
               2024-08-04
@@ -387,7 +387,7 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">13</span> Minutes
+              Estimated Reading Time <span class="post-count">12</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
@@ -453,725 +453,171 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <h1>一、架构分析</h1>
-<hr>
-<h2 id="1-架构概览">1. 架构概览</h2>
-<p>在本节中，将对最后一次迭代（hw3）的项目进行分析，先在此简单描述一下<strong>我的思路</strong>：</p>
-<ol>
-<li>解析并存储<strong>自定义函数</strong>（UDF）</li>
-<li>去除输入表达式<strong>空格和\t</strong>，<strong>递归</strong>地进行<strong>字符串替换</strong>掉函数调用</li>
-<li>对2中得到的表达式<strong>边解析边化简</strong>，得到最终表达式</li>
-<li>输出结果</li>
-</ol>
-<p>因此整体架构可以被分为两部分：<strong>解析、预处理部分</strong> 以及 <strong>存储、化简部分</strong>，前者对应Parser、Lexer、UDF相关类，后者对应Expr、Term、Factor等相关类。</p>
-<p>在最终的架构中，我从<strong>存算分离</strong>架构调整为了<strong>存算一体</strong>的架构，但本质上，解析和化简功能还是可以分开的。下面将分别进行介绍。</p>
-<h2 id="2-项目架构-类图">2. 项目架构-类图</h2>
-<p>该类图中省略了一些基本的内容，主要体现类之间的关系和一些核心功能的实现:<br>
-<br><br>
-<img src="https://i-blog.csdnimg.cn/blog_migrate/76eef7371dbaf3ad5865f179ab08f63f.png" alt="UML图"></p>
-  <center><small>使用PlantUML工具编辑绘制的UML图</small></center>
-<h2 id="3-类设计思路阐释">3. 类设计思路阐释</h2>
-<h3 id="1-预处理和整体思路">(1) 预处理和整体思路</h3>
-<p>对于Parser、Lexer部分的设计和training提供的思路类似，即使用递归下降的方法，通过Lexer对字符串进行token提取，由Parser对token进行识别和解析，完成存储，这里就不过多展开。</p>
-<p>对于UDF（函数）的存储，设计了UDF类，</p>
-<p>为了对UDF输入进行解析，设计了<strong>UdfParser</strong>类，实际上和Parser关联不强，只是也使用了Lexer进行token分割和提取，对于自定义函数进行<strong>名称、形参、表达式的识别和存储</strong>，生成UDF。</p>
-<h3 id="2-存储-计算">(2) 存储&amp;计算</h3>
-<p>这部分是比较核心的地方，大架构参考training的<strong>Expr-Term-Factor</strong>的三层结构，设计<strong>Factor接口</strong>让Expr完成implement，以实现表达式套表达式的括号嵌套。</p>
-<p>Factor接口定义了因子的三个共同行为，分别是<strong>求导</strong>、<strong>转换为表达式</strong>、<strong>化简</strong>，共有四个实现，即<strong>Number</strong>（常量）、<strong>VarFactor</strong>（对应x^a）、<strong>Expr</strong>（表达式因子）、<strong>Expo</strong>（对应exp()）</p>
-<p>每个底层因子都很直观地按照形式化表述的定义设计，通过calc和toExpr和d这三个接口中规定的方法，<strong>把add和mul都通过Expr类进行实现，减少了实现其他类之间加&amp;乘运算的代码量。</strong></p>
-<h2 id="4-用数据说话——基于统计结果的分析">4. 用数据说话——基于统计结果的分析</h2>
-<p>使用IDEA插件Statistic，得到各个类的规模（代码行数、方法个数）</p>
+        <h1>OO Unit3  总结</h1>
+<h2 id="一、-概述">一、 概述</h2>
+<p>本单元的三次作业主要是实现jml所要求的各个类以及相应方法，并进行某个方法的JUnit测试。总体来看，对于架构设计的要求大幅减弱（因为提供了相应的接口，可以认为最核心部分的架构已经设计好了），其中的难点是如果一味地按照JML写，只能保证正确性，却不能保证时间复杂度足够优秀。另外的难点就是在有限次数中测出全部JUnit测试点的问题。</p>
+<p>三次作业中，主要是增量的开发，有的时候会对已有的方法进行一定的修改。</p>
+<h2 id="二、架构和图模型-——兼谈性能问题">二、架构和图模型 ——兼谈性能问题</h2>
+<h3 id="1-架构">1. 架构</h3>
+<p>这里就简单的介绍一下架构的设计以及对于图模型构建和维护策略。</p>
+<p>对于hw9，除异常外，只有Person类和Network类两个主类，而person包含于network中。</p>
+<p>hw10增加了Tag类，并需要维护Tag相关的属性，较有挑战性的是维护valueSum、ageSum，其中Tag内聚于Person类。</p>
+<p>hw11增加了Message类，并增加了对应的操作，此次作业综合运用了Tag、Message和Person类。</p>
+<p><img src="/OO-Unit3/class.png" alt></p>
+<h3 id="2-图相关设计-性能问题考量">2. 图相关设计&amp;性能问题考量</h3>
+<p>我在本次作业中没有出现因实现方法不好、性能不佳导致的错误。</p>
+<p>对于Network中的操作，主要就是增删改查。如果完全按照JML规格的描述进行实现，会出现时间复杂度过高的方法绝大多数都是查询方法——queryValueSum: $O(n^2)$、queryTripleSum: $O(n^3)$、queryAgeVar: $O(n^2)$等，因此必须使用一些方法控制时间复杂度。</p>
+<p>下面是一些我所使用的方法。</p>
+<h4 id="1-实时维护值——分摊时间复杂度">(1) 实时维护值——分摊时间复杂度</h4>
+<p>根据木桶效应，程序的效率取决于时间复杂度最高的方法。对于类似valueSum、TripleSum、ageVar的查询，我们可以发现如果每次都要用极高的复杂度计算结果是一定不行的，而有趣的是对于相关的结果的改变似乎<strong>只发生在几个过程中</strong>，比如valueSum其实是tag内任意pair之间的value之和，那么只有在addPersonToTag、addRelation、modifyRelation以及delPerson的时候这个值会改变。</p>
+<p>万幸的是，<strong>如果我们试图在每次修改这个值的时候进行维护，其时间复杂度是完全可以接受的</strong>——以addPersonToTag为例，假设最开始的实现是$O(1)$，我们在每次加人的时候就判断新人和tag里已有的人是否存在关系，存在的话就加在valueSum上，这样加人操作变为了$O(n)$，同理删人也变成了$O(n)$，但是这都是可以接受的，在修改relation值的时候，显然我们对应地更新valueSum的操作也是$O(1)$的，并没有什么影响，最重要的是，这时候我们的queryValueSum就完全是$O(1)$了！</p>
+<p>回想我们上面的改进，<strong>实质上是把$O(n^2)$的queryValueSum的时间复杂度摊给了增删改操作</strong>，从而保证了整体的理论极限复杂度控制在$O(n)$。</p>
+<p>使用这个方法进行优化的方法有：</p>
+<p><strong>MyNetwork的queryValueSum、queryBlockSum、queryTripleSum</strong></p>
+<h4 id="2-dirty位">(2) dirty位</h4>
+<p>对于一些严格时间复杂度已经满足要求而又不是$O(1)$的查询方法，实际上我们也可以通过设置dirty位的方式进行优化——如queryCoupleSum，我的设计中通过每次遍历person的bestAcquaintance的bestAcquaintance是不是自己，$O(n)$计算结果。但是显然如果没有任何relation发生了变化，那么这个结果是不变的，设置dirty位后，对于连续的查询，只需要计算第一次，后面可以做到$O(1)$返回。</p>
+<p>虽然对于严格时间复杂度没有影响，但实质上提升了程序运行的效率（提升效果与数据构造有关），使用这种方法的方法有：</p>
+<p><strong>MyNetwork中的queryCoupleSum</strong></p>
+<h4 id="3-容器选择">(3)  容器选择</h4>
+<p>jml的描述中，为了方便使用的都是朴素的数组，然而，很多方法的jml实现复杂度较高正是因为使用了数组这种数据结构。如果使用HashMap来存储Person、Message等，理论上可以平均$O(1)$的时间找到对象，而非jml中遍历数组的$O(n)$。</p>
+<p>另外，不同容器可能有类似的方法，比如remove(object)或remove(index)，对于ArrayList，他们是$O(n)$的，而对于HashMap，他们是$O(1)$的，对LinkedList则分别是$O(n)$和$O(1)$的。因此如果你在LinkedList中循环遍历元素、然后if判断后用remove(Object)，很不幸，时间复杂度是$O(n^2)$的；而如果你使用的是remove(index)或者使用迭代器删除（或者基于迭代器+判断的原生方法removeIf），那么就是$O(n)$的。<strong>这告诉我们要谨慎地选择符合需求的容器，并一定要确认好所用方法的时间复杂度。</strong></p>
+<p>使用最多的容器是HashMap，因为需要根据id检索，所以MyNetwork中的persons，messages，emojiIds（id-&gt;heat)、MyPerson中的acquaintances、values、tags都选择了HashMap</p>
+<h4 id="4-优秀的算法">(4) 优秀的算法</h4>
+<p>对于一些问题，可能本身就有成熟的解法，我们可以通过学习表现较好的算法，将其用在hw之中。</p>
+<p>比如queryShortestPath，由于我们的“最短路”定义是走过关系的数量-1，所以实际上是一个无权图最短路——表现较好的方式是bfs，只需要$O(n)$的时间就可以；研讨课有些同学说使用dijkstra算法，可能是没有注意到边权的特殊性。另外，也可以通过双向bfs进一步优化，但是同学说他写双向宽搜的时候发现一个赋值语句莫名其妙占了很长时间，导致最终效果甚微。</p>
+<p>另外是BlockSum的问题，如果没有删除relation的操作，那么我们可以放心大胆且优雅地使用并查集，但是有删除的话，理论上就需要重构并查集，其重构过程为$O(n)$，实际上跟手动维护每个block的最大时间复杂度一样。但是研讨课上有同学提出，可以构建一颗生成树，如果删的关系是树上的，才需要重新构建并查集（因为不在树上的，一定不会使得blockSum增加，在树上的也不一定），类似dirty位，没有影响的关系就不进行修改。</p>
+<h3 id="3-各方法时间复杂度">3. 各方法时间复杂度</h3>
+<p>下表展示了时间复杂度，忽略了无需优化也是O(1)的方法（比如getId）、以及在Network中直接套壳的方法。</p>
+<h4 id="1-MyPerson">(1) MyPerson</h4>
 <table>
 <thead>
 <tr>
-<th>Class</th>
-<th>Source Code Lines</th>
-<th>方法个数</th>
+<th>方法名</th>
+<th>时间复杂度</th>
+<th>优化方法</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Factor</td>
-<td>5</td>
-<td>3</td>
+<td>addRelation,modifyValue,delRelation</td>
+<td>O(n)</td>
+<td>为维护valueSum，需维护person所在的所有Tag，O(1) -&gt; O(n)</td>
 </tr>
 <tr>
-<td>UdfParser</td>
-<td>25</td>
-<td>3</td>
+<td>getReceivedMessages</td>
+<td>O(1)</td>
+<td>使用LinkedList优化</td>
 </tr>
 <tr>
-<td>Number</td>
-<td>25</td>
-<td>6</td>
+<td>addMessage</td>
+<td>O(1)</td>
+<td>使用LinkedList优化，头部插入O(1)</td>
 </tr>
 <tr>
-<td>Expo</td>
-<td>28</td>
-<td>6</td>
-</tr>
-<tr>
-<td>VarFactor</td>
-<td>29</td>
-<td>6</td>
-</tr>
-<tr>
-<td>Lexer</td>
-<td>43</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Udf</td>
-<td>46</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Term</td>
-<td>87</td>
-<td>12</td>
-</tr>
-<tr>
-<td>MainClass</td>
-<td>80</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Parser</td>
-<td>136</td>
-<td>9</td>
-</tr>
-<tr>
-<td>Expr</td>
-<td>301</td>
-<td>16</td>
+<td>clearNotice</td>
+<td>O(n)</td>
+<td>使用LinkedList的removeIf方法，保证O(n)</td>
 </tr>
 </tbody>
 </table>
-<p>可以看到Expr类的代码行数最多，因为Expr不仅是最终得出答案的最大容器，同时也是因为架构设计时，对于不同Factor的加乘运算都在Expr进行（使用toExpr后mul，或者使用Expr的addST）。</p>
-<p>方法数量较多是因为对于每种Factor或Term、Expr，都<strong>设计了多种构造函数</strong>，虽然可能看起来比较冗余，但是这样<strong>易于扩展，使得代码可读性增强</strong>。例如在VarFactor的构造函数就有传入int类、传入BigInteger类的两种构造函数。</p>
-<p>使用IDEA插件Metric Reloaded，分别计算出各个方法的圈复杂度</p>
+<h4 id="2-MyTag">(2) MyTag</h4>
 <table>
 <thead>
 <tr>
-<th>Method</th>
-<th>CogC</th>
-<th>ev(G)</th>
-<th>iv(G)</th>
-<th>v(G)</th>
+<th>方法名</th>
+<th>时间复杂度</th>
+<th>优化方法</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Expo.Expo(Expr)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
+<td>addPerson</td>
+<td>O(n)</td>
+<td>为维护valueSum，O(1) -&gt; O(n)</td>
 </tr>
 <tr>
-<td>Expo.Expo(Factor)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
+<td>delPerson</td>
+<td>O(n)</td>
+<td>同上</td>
 </tr>
 <tr>
-<td>Expo.calc()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expo.d()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expo.getUp()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expo.toExpr()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expr.Expr()</td>
-<td>3</td>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Expr.Expr(Factor)</td>
-<td>3</td>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Expr.add(Expr)</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Expr.addST(Term)</td>
-<td>7</td>
-<td>1</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Expr.addTerm(Term)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expr.calc()</td>
-<td><strong>10</strong></td>
-<td>3</td>
-<td>5</td>
-<td>7</td>
-</tr>
-<tr>
-<td>Expr.compareTo(Expr)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expr.copy()</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Expr.d()</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Expr.isFactor()</td>
-<td>8</td>
-<td>6</td>
-<td>7</td>
-<td>9</td>
-</tr>
-<tr>
-<td>Expr.mul1(Expr)</td>
-<td><strong>16</strong></td>
-<td>6</td>
-<td>6</td>
-<td>7</td>
-</tr>
-<tr>
-<td>Expr.toAns()</td>
-<td><strong>34</strong></td>
-<td>4</td>
-<td>15</td>
-<td>18</td>
-</tr>
-<tr>
-<td>Expr.toAnsFir()</td>
-<td><strong>28</strong></td>
-<td>4</td>
-<td>11</td>
-<td>11</td>
-</tr>
-<tr>
-<td>Expr.toAnsIn()</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Expr.toExpr()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Expr.toString()</td>
-<td>3</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Lexer.Lexer(String)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Lexer.getNumber()</td>
-<td>2</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Lexer.getRem()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Lexer.getToken()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Lexer.next()</td>
-<td>6</td>
-<td>2</td>
-<td>5</td>
-<td>6</td>
-</tr>
-<tr>
-<td>MainClass.main(String[])</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>MainClass.pre(String)</td>
-<td><strong>48</strong></td>
-<td>8</td>
-<td>13</td>
-<td>17</td>
-</tr>
-<tr>
-<td>Number.Number(int)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Number.Number(int, BigInteger)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Number.calc()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Number.d()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Number.getValue()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Number.toExpr()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Parser.Parser(Lexer)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Parser.getLexer()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Parser.parseDX()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Parser.parseEF()</td>
-<td>8</td>
-<td>4</td>
-<td>6</td>
-<td>6</td>
-</tr>
-<tr>
-<td>Parser.parseEP()</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Parser.parseExpr()</td>
-<td>8</td>
-<td>1</td>
-<td>7</td>
-<td>7</td>
-</tr>
-<tr>
-<td>Parser.parseFactor()</td>
-<td><strong>11</strong></td>
-<td>5</td>
-<td>7</td>
-<td>8</td>
-</tr>
-<tr>
-<td>Parser.parseTerm(int)</td>
-<td>3</td>
-<td>1</td>
-<td>4</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Parser.parseVF()</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Term.Term()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.Term(BigInteger, BigInteger, Expr)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.Term(Factor)</td>
-<td>4</td>
-<td>1</td>
-<td>4</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Term.addFactor(Factor)</td>
-<td>5</td>
-<td>1</td>
-<td>5</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Term.addPow(BigInteger)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.calc()</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Term.d()</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Term.getFlag()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.getPow()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.getPowE()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.mulFlag(BigInteger)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Term.mulFlag(int)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Udf.Udf(String, ArrayList<String>,  String)</String></td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Udf.calc()</td>
-<td>7</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-</tr>
-<tr>
-<td>Udf.call(ArrayList<String>)</String></td>
-<td>4</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Udf.getName()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Udf.getNum()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>UdfParser.CreateUdf()</td>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>UdfParser.UdfParser(Lexer)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>UdfParser.UdfParser(Lexer,  HashMap&lt;String, Udf&gt;)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>VarFactor.VarFactor(BigInteger)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>VarFactor.VarFactor(int)</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>VarFactor.calc()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>VarFactor.d()</td>
-<td>1</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>VarFactor.getPow()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>VarFactor.toExpr()</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>compare(Pair&lt;BigInteger, Expr&gt;,  Pair&lt;BigInteger, Expr&gt;)</td>
-<td>2</td>
-<td>n/a</td>
-<td>n/a</td>
-<td>n/a</td>
+<td>getAgeMean/Var</td>
+<td>O(1)</td>
+<td>维护ageSum、ageSquareSum，拆分等式</td>
 </tr>
 </tbody>
 </table>
-<p>可以看到圈复杂度高的方法主要有Main的pre方法、Expr的两个toAns方法和Expr的mul1方法，pre方法解析str中的自定义函数、两个toAns方法是最终输出（第一项和其他项），因此有很多分支。mul1方法实现了两个Expr的乘法，涉及判0和一些其他事宜，复杂度较高，而<strong>其他方法圈复杂度都小于10，整体复杂性可以接受</strong>。</p>
-<p>而对于每个Class，我们也有：</p>
+<h4 id="3-MyNetwork">(3) MyNetwork</h4>
 <table>
 <thead>
 <tr>
-<th>Class</th>
-<th>OCavg</th>
-<th>OCmax</th>
-<th>WMC</th>
+<th>方法名</th>
+<th>时间复杂度</th>
+<th>优化方法-备注</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Expo</td>
-<td>1</td>
-<td>1</td>
-<td>6</td>
+<td>addRelation</td>
+<td>O(n)</td>
+<td>为维护TripleSum，每次加边O(n)</td>
 </tr>
 <tr>
-<td>Expr</td>
-<td>3.89</td>
-<td>15</td>
-<td>70</td>
+<td>modifyRelation</td>
+<td>O(n)</td>
+<td>同上</td>
 </tr>
 <tr>
-<td>Lexer</td>
-<td>2.2</td>
-<td>6</td>
-<td>11</td>
+<td>queryBlockSum/TripleSum</td>
+<td>O(1)</td>
+<td>通过动态维护，实现O(1)查询</td>
 </tr>
 <tr>
-<td>MainClass</td>
-<td>7.5</td>
-<td>13</td>
-<td>15</td>
+<td>deleteColdEmoji</td>
+<td>O(n)</td>
+<td>迭代器删除Emoji、再遍历message O(n)删除</td>
 </tr>
 <tr>
-<td>Number</td>
-<td>1</td>
-<td>1</td>
-<td>6</td>
-</tr>
-<tr>
-<td>Parser</td>
-<td>3.56</td>
-<td>7</td>
-<td>32</td>
-</tr>
-<tr>
-<td>Term</td>
-<td>1.75</td>
-<td>5</td>
-<td>21</td>
-</tr>
-<tr>
-<td>Udf</td>
-<td>2</td>
-<td>4</td>
-<td>10</td>
-</tr>
-<tr>
-<td>UdfParser</td>
-<td>1.33</td>
-<td>2</td>
-<td>4</td>
-</tr>
-<tr>
-<td>VarFactor</td>
-<td>1.17</td>
-<td>2</td>
-<td>7</td>
+<td>sendMessage</td>
+<td>O(n)</td>
+<td>群发红包消息需要动态维护</td>
 </tr>
 </tbody>
 </table>
-<p>可以看到WMC（加权方法复杂度）同样聚集在Expr类，其次是Parser，这和架构设计和功能特性关联很强。</p>
-<h1>二、迭代</h1>
-<h2 id="1-架构演化">1. 架构演化</h2>
-<h3 id="第一次作业-——-存算分离的典型">第一次作业 —— 存算分离的典型</h3>
-<p>第一次作业由于内容较少，而且training和OOLens都提供了递归下降的解读和示例，因此可能大家的设计主要分为两类——<strong>存算一体和存算分离</strong>，我最开始为了方便理清思路、便于调试，使用了后者，同时明确了使用基本项（a*x^b）和基本项构成的加法多项式存储结果。</p>
-<p>但实际上先解析再计算架构为了区分两个过程，我认为<strong>最好设计单独的基本项和多项式类</strong>，不要在化简时直接复用解析时使用的Expr，但我觉得其实差不多所以没有分开，开发过程中确实思路上和实现时产生了一些困扰。</p>
-<h3 id="第二次作业-——-缝缝补补和一些动摇">第二次作业 —— 缝缝补补和一些动摇</h3>
-<p>第二次作业允许了括号嵌套，新增了指数因子和自定义函数。前者实际上递归下降方法本身就支持多层括号，而新增指数因子只需要新增一个Expo类，自定义函数经过严谨论证如果不考虑效率（即函数表达式和形参的化简）直接使用字符串替换即可，因此架构只会增添，不会太改变。</p>
-<p>但是我担心我的存算分离架构在括号过多的时候可能运行效率不佳，因此在解析表达式因子的时候也调用了Expr.calc()进行计算，但最外一层仍需要最后调用calc，此时我的架构处于一个不太明确的状态，也可能导致重复运算，但由于细节处理得当，整体运行速度允许有这样的冗余。</p>
-<p>基本功能实现了，但是为了性能分肯定要做基本的合并同类项——这时候判断exp上面的expr是否相等就要花头脑了。为此我对Expr的存储顺序进行了规定，保证toString后结果唯一，用字符串判断。这时候由于没有单独的Poly类导致写起来确实有点麻烦。</p>
-<h3 id="第三次作业">第三次作业</h3>
-<p>第三次作业加的内容不多，就是求导和自定义函数嵌套。求导只需要先化简内部表达式或因子，在每一层都实现求导，再实现乘法规则即可，自定义函数嵌套由于字符串替换的递归实现，所以无需做出什么改变。</p>
-<p>整体架构没有发生什么变化。</p>
-<p>可见我的架构实际上比较清晰，类的数量较少，比较轻量级，但每个类的功能不够单一，部分类的代码量大，导致迭代和维护相对困难。</p>
-<h2 id="2-迭代情景假设——三角函数">2. 迭代情景假设——三角函数</h2>
-<p>新增三角函数的话，因为cos和sin之间可以相互转化，所以只需要新增实现Factor接口的sin类，在Parser和Lexer部分相应修改。</p>
-<p>对应的，基本项需要扩充为a<em>x^b</em>exp(Expr)*sin(Expr)，化简仍然依靠Expr的toString比较sin里面是否相同。</p>
-<h1>三、本地测试、强测、互测和性能优化</h1>
-<h2 id="1-我的“Bug”们">1. 我的“Bug”们</h2>
-<p>在第一次作业中，为了实现更好的性能分，我试图将正项提前以减少一个加号，但是写的时候对于0项的处理没有弄好，之前的逻辑是在化简的时候保证0不出现，因此输出没有考虑0的部分，但是在优化了部分逻辑、新增正向提前后，前面化简的时候有个部分忘记去除了0项，导致<strong>输出错误</strong>，十分可惜。</p>
-<p>这个惨痛的教训让我意识到：一个功能在可以做的时候就要做好，即使增加冗余也比出错好，这样就可以使自己的程序更加robust，而不是试图依赖上下游的处理，一个不小心就弄出问题。这次出现bug的方法<strong>圈复杂度较高、代码行数也高</strong>，因此<strong>很容易考虑不周到，导致一个疏忽就犯了错</strong>，但由于为了追求输出更短，其代码逻辑本身就很琐碎，因此我尝试了增加容错和冗余的方法保证正确性。</p>
-<p>在第三次作业中，互测<strong>被卡了TLE</strong>。因为之前没考虑TLE的事情（毕竟已经边化简边解析了，不会被很简单的1-1的一堆次方卡，而且看到强测时间给的很长），所以很多可以优化效率的地方没有实现，而且增加了一些容错和冗余（比如输出前再计算一次），结果就被卡了。最终分析后，我发现在exp合并的时候，Expr的toString会花费很多时间，而实际上Expr如果不改变是<strong>不需要多次toString</strong>的，于是在对Expr的toString<strong>记忆化处理</strong>后，顺利通过bug修复。</p>
-<h2 id="2-测试方法与互测">2. 测试方法与互测</h2>
-<p>主要以跑评测机为主，随机生成数据、使用同学们的评测机等，但随机的话其实数据很弱，很难生成出bug，而且互测中即使使用评测机生成出bug数据后还需要手动化简为符合cost的结果，因此手动构造一些极端情况、边界情况的数据也很必要。</p>
-<p>另外也会通过粗略分析对方代码架构的方式，有针对性地进行数据设计，有些同学会无脑先做n次方再进行化简，这时候1-1+x的n次方就会让他算得很多导致TLE等等。</p>
-<h2 id="长度优化与效率优化">长度优化与效率优化</h2>
-<p>上文提到过，关于长度优化，最基础的合并同类项（第二次以后通过Expr有序toString进行判断）、正项提前（这一项导致输出逻辑变得更长了，因此我特意将输出第一项单独实现了一个方法（toAnsFir），试图使得方法简单可读性强）外，没有进行额外优化（担心时间复杂度变得很坏，以及有时候提取公因数还不如不提）。</p>
-<p>而效率优化主要是在计算前先保证内部已经化简（用change的Tag进行记忆化），以及toString的时候通过记忆化，减少了无意义的重复运算。这些优化对于各个方法复杂度几乎没有影响。</p>
-<h1>四、心得体会</h1>
-<p>OO正课相比OOpre可谓不是一个层级的，第一单元的学习也让我收获颇丰，不仅是简单的写代码速度提升，更是对于写代码之前，对于简洁高效的架构设计以及预判未来拓展方向、预留拓展空间的考量提升颇多。这一点在OOpre中只是“听到了老师有讲过”，但是没有在写代码过程中自己感受到。</p>
-<p>另外第一次作业在实现的时候确实有一定的思维难度，不真正下手写一些感觉自己的理解都是虚无缥缈的，边写边深化自己的理解，然后再订正自己的大思路，我觉得这是适合我的方法，因此我也觉得我其实应该在第二次作业的时候进行重构，因为有了新的想法，发现自己之前的设计有缺陷，其实重构是最好的，如果有五六次作业，或者最后一次不是比较简单好实现的求导，那我肯定果断重构了。</p>
-<h1>五、建议</h1>
-<p>第一单元教程很完善，不过我觉得应该在第一次就允许括号套括号，以确保大家对递归下降法的理解比较完善准确。</p>
+<h2 id="三、测试方法">三、测试方法</h2>
+<p>本单元我的测试除了最基础的<strong>基于结果的测试</strong>，或者叫“集成测试”外，也有基于规格要求的Junit<strong>黑箱测试</strong>、为特定方法构造的极限数据<strong>压力测试</strong>。</p>
+<p>在我的理解中，<strong>白箱测试</strong>是“你知道你在测试的是什么，并且需要针对性地测试里面过程是否正确被实现”，而<strong>黑箱测试</strong>则是“我可以不知道里面在做什么，我只需要测试方法执行前后状态的改变”。我认为本单元要求的<strong>JUnit测试</strong>就是<strong>黑箱测试</strong>。</p>
+<p><strong>单元测试</strong>主要针对一个函数、方法进行测试；<strong>功能测试</strong>是针对需求中一项功能进行整体测试，对应到代码中可能是几个函数的整体配合，也有可能就是一个函数，这个“功能”更偏向需求侧的描述；<strong>集成测试</strong>则是整体性的测试；<strong>压力测试</strong>更多是对代码的极限测试；<strong>回归测试</strong>是对迭代前的旧代码再进行测试，看看旧代码有没有在新代码中引起新的问题。</p>
+<h3 id="1-我的测试实践">1. 我的测试实践</h3>
+<p>本单元的测试我认为主要在<strong>正确性</strong>和<strong>时间要求</strong>两个要求，对于正确性，JML是“圣旨”，可以通过给每个方法进行测试，但是这样又慢又耗时间，因为每个方法的测试还需要准备数据、调用其他方法。所以我的方法是通过<strong>大量随机数据</strong>+<strong>人为构造一些可能出错的数据</strong>进行对拍，这样做的好处是比较方便，但是坏处在于如果对题意理解不够精准、或数据构造策略选取不当，可能永远测不出我的bug。事实证明，jml更新以后我没有仔细地捕捉到变化，导致我没有测试到发RedEnvelopeMessage时Tag size为0的情况。</p>
+<h3 id="2-极限测试">2. 极限测试</h3>
+<p>对于时间复杂度高（尤其是JML里面的实现超过O(n)的算法）的方法，在构造数据充分测试我的实现正确性后，要构造使我的实现达到最坏复杂度的数据，判断我的实现是否真的能达到效果（比如对于一些值的维护假如只是增加了dirty位，对于随机数据可能有概率能过，但是蓄意的修改/查询就会使得复杂度非常的坏）</p>
+<h3 id="3-测试数据构造策略——面向JML规格的数据构造">3. 测试数据构造策略——面向JML规格的数据构造</h3>
+<p>JML中有对异常行为的规定，这一点在测试的时候很容易被忽略，对于构造测试数据的时候，也要测试异常处理是否正确。 这就要求在数据生成的时候对于各种情况都能生成到，在手动生成数据的时候肯定较为方便，但是麻烦；对于随机数据生成器，则可能需要<strong>控制一下概率</strong>（比如通过%2，%3手动规定各个情况概率相等）、并<strong>增大测试组数和数据条数</strong>以保证各种情况的排列组合都有概率遍历到。</p>
+<h2 id="四、JUnit">四、JUnit</h2>
+<p>本单元的JUnit确实是一个难点，主要在于测试出未知的错误代码的问题，总结下来有以下几个要点：</p>
+<h3 id="1-数据构造多样性">1. 数据构造多样性</h3>
+<p>通过@Parameters修饰的方法，有策略性地构造多组数据，在我的实践中，构造了只有点的图、完全图、随机图、链以及拆开的链。由于规定了其他实现正确，因此只需要提供一个现有的Network，无需无意义的modifyRelation等操作。</p>
+<p>对于hw11中新增的Message，需要提前增加各种Message，并保证一部分被send，增加Emoji的heat。</p>
+<h3 id="2-result要求">2. result要求</h3>
+<p>对于函数返回值的测试，一般是最简单的，大部分人不会忽略。根据jml的result计算方式，暴力地计算结果即可，注意如果没有使用两个network实现测试，要进行你的检验计算，再调用函数，否则内部可能已经改变。</p>
+<h3 id="3-副作用测试">3. 副作用测试</h3>
+<p>该变的应该按要求发生变化，并符合要求；而更重要的是，不变的就不能变化。为此，要对比方法调用前后对应数据结构的<strong>size</strong>、内部<strong>元素的对应关系</strong>，为避免浅拷贝的问题，还可以在构造数据的时候就构造一个形状完全一样但是是深拷贝的network，虽然好像有些人不考虑这个问题也通过了case。</p>
+<h3 id="4-充分发挥JML对测试检验的决定性作用">4. 充分发挥JML对测试检验的决定性作用</h3>
+<p>JML作为本单元唯一规定功能正确性的要求，应当被严格遵守，因此每一条都应当被仔细检验。</p>
+<p>毕竟测试代码无需考虑性能问题，因此，直接实现jml的方法进行计算结果检验和容器内容检验即可，简单又安心，外加注意好克隆问题和数据构造（有些同学甚至构造完数据没有message，那当然无法测出messages数组是否变化啊），在测试组数选取足够大的情况下即可轻松通过测试。</p>
+<h2 id="五、单元感想">五、单元感想</h2>
+<p>这个单元的作业量不大，而且很多时间也花在了写一些思维量小的代码，真正要思考如何实现、优化的时间不多。而相比之下，测试和检查的时间则更多了一点，既有JUnit的测试点有时候令我煞费苦心，也有担心自己实现的错误而仔细对比代码和JML的惴惴不安。</p>
+<p>本单元也收获了JML以及契约式编程的思想，为以后复杂软件/项目开发提供了一定的可靠性理论支持，从一定程度上杜绝了“屎山”的出现，当然，我们现在只是能够根据JML进行实现和测试，但是可能一个项目更重要的是设计出合理的架构以及方法，并为函数设计JML规定，最后才是根据规定进行实现和测试。</p>
 
 
         <hr>
         <!-- Pager -->
         <ul class="pager">
+          
+          <li class="previous">
+            <a href="/OO-Unit4/" data-toggle="tooltip" data-placement="top" title="OO Unit4总结">&larr; Previous Post</a>
+          </li>
           
           
           <li class="next">
@@ -1224,7 +670,7 @@
       </a>
     </li>
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=OO第一单元&body=Hi,I found this website and thought you might like it http://yoursite-url/OO第一单元/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=OO_Unit3&body=Hi,I found this website and thought you might like it http://yoursite-url/OO-Unit3/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -1258,7 +704,7 @@
       repo: '',
       owner: '',
       admin: '',
-      id: 'Sun Aug 04 2024 11:48:50 GMT+0800', // Ensure uniqueness and length less than 50
+      id: 'Sun Aug 04 2024 12:27:13 GMT+0800', // Ensure uniqueness and length less than 50
       distractionFreeMode: false, // Facebook-like distraction free mode
       perPage: 10,
       pagerDirection: 'last',
@@ -1311,7 +757,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">一、架构分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%A7%88"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. 架构概览</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84-%E7%B1%BB%E5%9B%BE"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. 项目架构-类图</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF%E9%98%90%E9%87%8A"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3. 类设计思路阐释</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">(1) 预处理和整体思路</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%AD%98%E5%82%A8-%E8%AE%A1%E7%AE%97"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">(2) 存储&amp;计算</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-%E7%94%A8%E6%95%B0%E6%8D%AE%E8%AF%B4%E8%AF%9D%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E7%BB%93%E6%9E%9C%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">4. 用数据说话——基于统计结果的分析</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">二、迭代</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1. 架构演化</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E5%AD%98%E7%AE%97%E5%88%86%E7%A6%BB%E7%9A%84%E5%85%B8%E5%9E%8B"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">第一次作业 —— 存算分离的典型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E7%BC%9D%E7%BC%9D%E8%A1%A5%E8%A1%A5%E5%92%8C%E4%B8%80%E4%BA%9B%E5%8A%A8%E6%91%87"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">第二次作业 —— 缝缝补补和一些动摇</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">第三次作业</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E8%BF%AD%E4%BB%A3%E6%83%85%E6%99%AF%E5%81%87%E8%AE%BE%E2%80%94%E2%80%94%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2. 迭代情景假设——三角函数</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">三、本地测试、强测、互测和性能优化</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%88%91%E7%9A%84%E2%80%9CBug%E2%80%9D%E4%BB%AC"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1. 我的“Bug”们</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E4%B8%8E%E4%BA%92%E6%B5%8B"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2. 测试方法与互测</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%95%BF%E5%BA%A6%E4%BC%98%E5%8C%96%E4%B8%8E%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">长度优化与效率优化</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">四、心得体会</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">五、建议</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">OO Unit3  总结</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81-%E6%A6%82%E8%BF%B0"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">一、 概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E6%9E%B6%E6%9E%84%E5%92%8C%E5%9B%BE%E6%A8%A1%E5%9E%8B-%E2%80%94%E2%80%94%E5%85%BC%E8%B0%88%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">二、架构和图模型 ——兼谈性能问题</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E6%9E%B6%E6%9E%84"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">1. 架构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%9B%BE%E7%9B%B8%E5%85%B3%E8%AE%BE%E8%AE%A1-%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E8%80%83%E9%87%8F"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2. 图相关设计&amp;性能问题考量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E5%AE%9E%E6%97%B6%E7%BB%B4%E6%8A%A4%E5%80%BC%E2%80%94%E2%80%94%E5%88%86%E6%91%8A%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">(1) 实时维护值——分摊时间复杂度</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-dirty%E4%BD%8D"><span class="toc-nav-number">1.2.2.2.</span> <span class="toc-nav-text">(2) dirty位</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-%E5%AE%B9%E5%99%A8%E9%80%89%E6%8B%A9"><span class="toc-nav-number">1.2.2.3.</span> <span class="toc-nav-text">(3)  容器选择</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-%E4%BC%98%E7%A7%80%E7%9A%84%E7%AE%97%E6%B3%95"><span class="toc-nav-number">1.2.2.4.</span> <span class="toc-nav-text">(4) 优秀的算法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E5%90%84%E6%96%B9%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">3. 各方法时间复杂度</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-MyPerson"><span class="toc-nav-number">1.2.3.1.</span> <span class="toc-nav-text">(1) MyPerson</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-MyTag"><span class="toc-nav-number">1.2.3.2.</span> <span class="toc-nav-text">(2) MyTag</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-MyNetwork"><span class="toc-nav-number">1.2.3.3.</span> <span class="toc-nav-text">(3) MyNetwork</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">三、测试方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E6%88%91%E7%9A%84%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 我的测试实践</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E6%9E%81%E9%99%90%E6%B5%8B%E8%AF%95"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 极限测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E6%9E%84%E9%80%A0%E7%AD%96%E7%95%A5%E2%80%94%E2%80%94%E9%9D%A2%E5%90%91JML%E8%A7%84%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E6%9E%84%E9%80%A0"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">3. 测试数据构造策略——面向JML规格的数据构造</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%9B%9B%E3%80%81JUnit"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">四、JUnit</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E6%95%B0%E6%8D%AE%E6%9E%84%E9%80%A0%E5%A4%9A%E6%A0%B7%E6%80%A7"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">1. 数据构造多样性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-result%E8%A6%81%E6%B1%82"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">2. result要求</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E5%89%AF%E4%BD%9C%E7%94%A8%E6%B5%8B%E8%AF%95"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">3. 副作用测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5JML%E5%AF%B9%E6%B5%8B%E8%AF%95%E6%A3%80%E9%AA%8C%E7%9A%84%E5%86%B3%E5%AE%9A%E6%80%A7%E4%BD%9C%E7%94%A8"><span class="toc-nav-number">1.4.4.</span> <span class="toc-nav-text">4. 充分发挥JML对测试检验的决定性作用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BA%94%E3%80%81%E5%8D%95%E5%85%83%E6%84%9F%E6%83%B3"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">五、单元感想</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -1531,7 +977,7 @@
     let jsdelivr = "https://cdn.jsdelivr.net/gh/";
     let gh = "liboqiao1234";
     let ghPages = gh + ".github.io";
-    let pagePath = "OO第一单元/";
+    let pagePath = "OO-Unit3/";
     let jsdelivrurl;
     if (pagePath.indexOf("index.html") != -1) {
       jsdelivrurl = jsdelivr + gh + "/" + ghPages;
