@@ -347,7 +347,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite-url/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD/</loc>
+    <loc>http://yoursite-url/tags/%E7%A4%BE%E7%A7%91/</loc>
     <lastmod>2024-08-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -426,7 +426,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite-url/categories/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CA%BC%EF%BF%BD/</loc>
+    <loc>http://yoursite-url/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-08-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
