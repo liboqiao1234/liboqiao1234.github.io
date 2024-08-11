@@ -406,7 +406,16 @@
     </div>
 </header>
 <script>
+	let ans = "show";
+	let now ="";
     document.body.classList.add('page-fullscreen');
+    document.onkeydown = (e) => {
+		const {key} = e;
+		now=now+e;
+		if(now===ans){
+			alert("解锁隐藏彩蛋！");
+		}
+	}
 </script>
 
 
