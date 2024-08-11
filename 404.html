@@ -400,6 +400,10 @@
                     <h1>404</h1>
                     <!--<hr class="small">-->
                     <span class="subheading">I&#39;m sorry there is nothing that you want , but you can enjoy the scenery here ...</span>
+                    <div id="caidan" style="display:none">
+                    	<br>
+                    	<a href="/" style="color:white">隐藏博客</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -412,8 +416,13 @@
     document.onkeydown = (e) => {
 		const {key} = e;
 		now=now+key;
+		if (key == "c") {
+			now = "";
+		}
 		if(now===ans){
 			alert("解锁隐藏彩蛋！");
+			now = "";
+			$("#caidan").css("display","block");
 		}
 	}
 </script>
