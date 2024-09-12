@@ -2,9 +2,45 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite-url/Factorio-Log/</loc>
+    <loc>http://yoursite-url/anaconda_jupyter/</loc>
     
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/%E5%85%AB%E6%AC%A1%E5%8D%B1%E6%9C%BA%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2024-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%85%A8%E9%9D%A2%E6%B7%B1%E5%8C%96%E6%94%B9%E9%9D%A9%E2%80%82%E6%8E%A8%E8%BF%9B%E4%B8%AD%E5%9B%BD%E5%BC%8F%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E5%86%B3%E5%AE%9A_%E4%B8%AD%E5%A4%AE%E6%9C%89%E5%85%B3%E6%96%87%E4%BB%B6_%E4%B8%AD%E5%9B%BD%E6%94%BF%E5%BA%9C%E7%BD%91_files/saved_resource(1)/</loc>
+    
+    <lastmod>2024-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%85%A8%E9%9D%A2%E6%B7%B1%E5%8C%96%E6%94%B9%E9%9D%A9%E2%80%82%E6%8E%A8%E8%BF%9B%E4%B8%AD%E5%9B%BD%E5%BC%8F%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E5%86%B3%E5%AE%9A_%E4%B8%AD%E5%A4%AE%E6%9C%89%E5%85%B3%E6%96%87%E4%BB%B6_%E4%B8%AD%E5%9B%BD%E6%94%BF%E5%BA%9C%E7%BD%91_files/saved_resource(2)/</loc>
+    
+    <lastmod>2024-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%85%A8%E9%9D%A2%E6%B7%B1%E5%8C%96%E6%94%B9%E9%9D%A9%E2%80%82%E6%8E%A8%E8%BF%9B%E4%B8%AD%E5%9B%BD%E5%BC%8F%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E5%86%B3%E5%AE%9A_%E4%B8%AD%E5%A4%AE%E6%9C%89%E5%85%B3%E6%96%87%E4%BB%B6_%E4%B8%AD%E5%9B%BD%E6%94%BF%E5%BA%9C%E7%BD%91_files/saved_resource/</loc>
+    
+    <lastmod>2024-09-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +49,25 @@
   <url>
     <loc>http://yoursite-url/%E3%80%8A%E5%BA%9F%E9%99%A4%E6%96%87%E7%A7%91%E5%AD%A6%E9%83%A8%E7%9A%84%E5%86%B2%E5%87%BB%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     
-    <lastmod>2024-08-08</lastmod>
+    <lastmod>2024-09-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/%E8%A5%BF%E7%93%9C%E4%B9%A6%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2024-09-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/Factorio-Log/</loc>
+    
+    <lastmod>2024-09-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -256,7 +310,7 @@
 
   <url>
     <loc>http://yoursite-url/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -264,91 +318,98 @@
   
   <url>
     <loc>http://yoursite-url/tags/%E7%BB%8F%E6%B5%8E-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/OO/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/OS/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/TODO-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/Blog-setup/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/Linux/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E7%BB%8F%E6%B5%8E/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/Game/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E8%8B%B1%E8%AF%AD/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://yoursite-url/tags/%E7%A4%BE%E7%A7%91/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <loc>http://yoursite-url/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD/</loc>
+    <lastmod>2024-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%D1%A7%CF%B0-AI-%EF%BF%BD%CA%BC%EF%BF%BD/</loc>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -357,77 +418,84 @@
   
   <url>
     <loc>http://yoursite-url/categories/%E7%BB%8F%E6%B5%8E/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/OO/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/OS/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/%E6%B8%85%E5%8D%95-TODO/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/Blog/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/TODO/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/Linux%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/%E8%8B%B1%E8%AF%AD/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/categories/%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://yoursite-url/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-08-12</lastmod>
+    <loc>http://yoursite-url/categories/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CA%BC%EF%BF%BD/</loc>
+    <lastmod>2024-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/categories/%D1%A7%CF%B0%EF%BF%BD%CA%BC%EF%BF%BD/</loc>
+    <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

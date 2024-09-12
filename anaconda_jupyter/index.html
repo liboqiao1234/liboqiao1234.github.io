@@ -141,7 +141,7 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://yoursite-url/tags/社科/">
+  <link rel="canonical" href="http://yoursite-url/anaconda_jupyter/">
   <title>
     
       UUQ&#39;s Blog
@@ -348,9 +348,9 @@
       --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('https://cdn.jsdelivr.net/gh/liboqiao1234/liboqiao1234.github.io/img/header_img/archive_bg2.jpg');
     }
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('https://cdn.jsdelivr.net/gh/liboqiao1234/liboqiao1234.github.io/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url('https://cdn.jsdelivr.net/gh/liboqiao1234/liboqiao1234.github.io'); */
       
     }
 
@@ -369,10 +369,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>UUQ&#39;s Blog</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">小小记录</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1></h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by UUQ on
+              2024-09-12
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">1</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">280</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -413,557 +443,263 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h2 id="1-如何在conda的jupyter中切换python版本？"><a href="#1-如何在conda的jupyter中切换python版本？" class="headerlink" title="1. 如何在conda的jupyter中切换python版本？"></a>1. 如何在conda的jupyter中切换python版本？</h2><h3 id="查看当前kernel的版本"><a href="#查看当前kernel的版本" class="headerlink" title="查看当前kernel的版本"></a>查看当前kernel的版本</h3><p>在jupyter的文档中，可以使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.version</span><br></pre></td></tr></table></figure>
+<p>查看当前kernel使用的版本，我这里默认好像就是conda base的python？</p>
+<h3 id="把自己配好的环境挂到jupyter中"><a href="#把自己配好的环境挂到jupyter中" class="headerlink" title="把自己配好的环境挂到jupyter中"></a>把自己配好的环境挂到jupyter中</h3><p>首先得装上ipykernel，然后直接运行下面指令（替换中间的env_name为你的conda环境名，后面引号为jupyter显示的内容）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install ipykernel</span><br><span class="line">python -m ipykernel install --user --name env_name --display-name <span class="string">&quot;Python [conda env:env_name]&quot;</span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="/anaconda_jupyter/Blog_tmp\anaconda_jupyter\image-20240806164543712.png" alt="image-20240806164543712"></p>
+<h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42686550/article/details/117065253">https://blog.csdn.net/qq_42686550/article/details/117065253</a></p>
+<h2 id="2-conda在powershell里面activate不管用？"><a href="#2-conda在powershell里面activate不管用？" class="headerlink" title="2. conda在powershell里面activate不管用？"></a>2. conda在powershell里面activate不管用？</h2><p>使用conda init powershell命令，然后重启powershell。</p>
+<p>如果打开显示无法运行脚本的红字，在管理员的powershell（win+x里面找）输入set-executionpolicy remotesigned，再重启powershell就好了。</p>
+<p>这里我还踩了个坑，环境变量的问题。之前可以在path里面一行写多个目录，用分号分开，但是现在好像不行了，powershell又报错，解决方法是把那个包含多个目录的一条拆成多个（我的是java的jdk和jre）</p>
+<p>虽然我还是觉得powershell就是不怎么好用。</p>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2024">
-          <span class="tag-text">2024</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            08-12
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/Factorio-Log/" style="color: #0085a1">
-              <span>
-                Factorio 日报
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            08-08
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/《废除文科学部的冲击》读书笔记/" style="color: #0085a1">
-              <span>
-                《废除文科学部的冲击》读书笔记
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-07
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/《八次危机》读书笔记/" style="color: #0085a1">
-              <span>
-                《八次危机》读书笔记
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-07
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/anaconda使用记录/" style="color: #0085a1">
-              <span>
-                anaconda使用记录
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/分子生物物理-专业英语/" style="color: #0085a1">
-              <span>
-                分子生物物理_专业英语
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-04
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/OO-Unit4/" style="color: #0085a1">
-              <span>
-                OO Unit4总结
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-04
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/OO-Unit3/" style="color: #0085a1">
-              <span>
-                OO_Unit3
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-01
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/《置身事内》摘录/" style="color: #0085a1">
-              <span>
-                《置身事内》读书记录（后半段）
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/第三章_利用期货的对冲策略/" style="color: #0085a1">
-              <span>
-                【期权期货衍生品】第三章 利用期货的对冲策略-未完成
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/第二章_期货市场与中央交易对手/" style="color: #0085a1">
-              <span>
-                【期权期货衍生品】第二章 期货市场与中央交易对手
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/第一章_导论/" style="color: #0085a1">
-              <span>
-                【期权期货衍生品】 第一章 导论
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            06-25
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/OS-lab6-challenge-shell/" style="color: #0085a1">
-              <span>
-                OS lab6 challenge shell
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            06-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/gods-blog/" style="color: #0085a1">
-              <span>
-                gods' blog
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            04-19
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/OO_Unit2/" style="color: #0085a1">
-              <span>
-                OO_Unit2
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            04-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/latest-todo/" style="color: #0085a1">
-              <span>
-                latest todo
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            04-01
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/4-1study/" style="color: #0085a1">
-              <span>
-                4.1study
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-29
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/OO评测机的自动评测脚本——基于DPO的实现/" style="color: #0085a1">
-              <span>
-                tmp
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-28
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/blog-todoList/" style="color: #0085a1">
-              <span>
-                blog-todoList
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-28
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/OO-Unit1-总结博客/" style="color: #0085a1">
-              <span>
-                OO Unit1 总结博客
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-25
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/Study-List/" style="color: #0085a1">
-              <span>
-                Study List
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-25
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/3-24-study/" style="color: #0085a1">
-              <span>
-                3.24 study
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/在Ubuntu22-04配置Steam-Watt-tool/" style="color: #0085a1">
-              <span>
-                在Ubuntu22.04配置Steam++(Watt tool)
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            03-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/test-page/" style="color: #0085a1">
-              <span>
-                test page
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/八次危机 读书笔记/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+      如果您喜欢此博客或发现它对您有用，则欢迎对此发表评论。 也欢迎您共享此博客，以便更多人可以参与。 如果博客中使用的图像侵犯了您的版权，请与作者联系以将其删除。 谢谢 ！
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=&body=Hi,I found this website and thought you might like it http://yoursite-url/anaconda_jupyter/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+  <!-- gitalk start -->
+  <!-- Docs:https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
+
+  <div id="gitalk-container"></div>
+
+  
+    <script src="https://cdn.jsdelivr.net/gh/liboqiao1234/liboqiao1234.github.io/js/comment/gitalk.js"></script>
+  
+
+  <script>
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: '',
+      admin: '',
+      id: 'Thu Sep 12 2024 09:52:45 GMT+0800', // Ensure uniqueness and length less than 50
+      distractionFreeMode: false, // Facebook-like distraction free mode
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      language: 'en',
+      proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+
+    var gtFolded = () => {
+      setTimeout(function () {
+        let markdownBody = document.getElementsByClassName("markdown-body");
+        let list = Array.from(markdownBody);
+        list.forEach(item => {
+          if (item.clientHeight > 250) {
+            item.classList.add('gt-comment-body-folded');
+            item.style.maxHeight = '250px';
+            item.title = 'Click to Expand';
+            item.onclick = function () {
+              item.classList.remove('gt-comment-body-folded');
+              item.style.maxHeight = '';
+              item.title = '';
+              item.onclick = null;
+            };
+          }
+        })
+      }, 800);
+    }
+  </script>
+
+  <!-- gitalk end -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
-    </div>
-  </div>
-</div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Visitors -->
-<h5><a href="/">来访者</a></h5>
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-<div class="widget">
-  <span>
-    Viewed <b><i><span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Times
-  </span>
-  <br />
-  <span>
-    <b><i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Visitors In Total
-  </span>
-</div>
-
-
-        <hr>
-    
         <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5>
+            <a href="/tags/">特色标签</a>
+          </h5>
+          <div class="tags">
+            
+          </div>
+        </section>
+        
 
-<section>
-  <h5><a href="/tags/">特色标签</a></h5>
-  <div class="tags">
-    
-    
-    <a href="/tags/#经济, 学习记录" title="经济, 学习记录" rel="1">经济, 学习记录</a>
-    
-    
-    
-    <a href="/tags/#学习记录" title="学习记录" rel="1">学习记录</a>
-    
-    
-    
-    <a href="/tags/#OO" title="OO" rel="4">OO</a>
-    
-    
-    
-    <a href="/tags/#OS" title="OS" rel="1">OS</a>
-    
-    
-    
-    <a href="/tags/#TODO, 学习记录" title="TODO, 学习记录" rel="1">TODO, 学习记录</a>
-    
-    
-    
-    <a href="/tags/#Blog-setup" title="Blog-setup" rel="2">Blog-setup</a>
-    
-    
-    
-    <a href="/tags/#Linux," title="Linux," rel="1">Linux,</a>
-    
-    
-    
-    <a href="/tags/#笔记" title="笔记" rel="3">笔记</a>
-    
-    
-    
-    <a href="/tags/#经济" title="经济" rel="2">经济</a>
-    
-    
-    
-    <a href="/tags/#Game" title="Game" rel="1">Game</a>
-    
-    
-    
-    <a href="/tags/#英语" title="英语" rel="1">英语</a>
-    
-    
-    
-    <a href="/tags/#环境" title="环境" rel="1">环境</a>
-    
-    
-    
-    <a href="/tags/#社科" title="社科" rel="1">社科</a>
-    
-    
-  </div>
-</section>
-
-
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/about/">关于自己</a></h5>
-  <div class="short-about">
-
-    
-
-    
-    <p>One class</p>
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/liboqiao1234">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/">最近博文</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../Factorio-Log/">
-      <li>Factorio 日报</li>
-    </a>
-    
-    <a href="../../%E3%80%8A%E5%BA%9F%E9%99%A4%E6%96%87%E7%A7%91%E5%AD%A6%E9%83%A8%E7%9A%84%E5%86%B2%E5%87%BB%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-      <li>《废除文科学部的冲击》读书笔记</li>
-    </a>
-    
-    <a href="../../%E3%80%8A%E5%85%AB%E6%AC%A1%E5%8D%B1%E6%9C%BA%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-      <li>《八次危机》读书笔记</li>
-    </a>
-    
-    <a href="../../anaconda%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
-      <li>anaconda使用记录</li>
-    </a>
-    
-    <a href="../../%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E7%89%A9%E7%90%86-%E4%B8%93%E4%B8%9A%E8%8B%B1%E8%AF%AD/">
-      <li>分子生物物理_专业英语</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
         <!-- Friends Blog -->
-
-<h5><a href="/">链友</a></h5>
-<ul class="list-inline">
-  
-  <li><a href="https://buaaczx.github.io/" target="_blank">BUAA_CZX</a></li>
-  
-  <li><a href="https://liboqiao1234.github.io/" target="_blank">Waiting for u...</a></li>
-  
-  <li><a href="" target="_blank"></a></li>
-  
-  <li><a href="https://hexo.io/" target="_blank">Hexo</a></li>
-  
-</ul>
-
-
+        
         <hr>
-    
-        <!-- Archives -->
+        <h5>链友</h5>
+        <ul class="list-inline">
 
-<h5><a href="/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/08/">August 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">July 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/06/">June 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">April 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/03/">March 2024</a><span class="archive-list-count">7</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/categories/#经济">
-      <li>经济</li>
-    </a>
-    
-    <a href="/categories/#OO">
-      <li>OO</li>
-    </a>
-    
-    <a href="/categories/#OS">
-      <li>OS</li>
-    </a>
-    
-    <a href="/categories/#清单, TODO">
-      <li>清单, TODO</li>
-    </a>
-    
-    <a href="/categories/#Blog">
-      <li>Blog</li>
-    </a>
-    
-    <a href="/categories/#TODO">
-      <li>TODO</li>
-    </a>
-    
-    <a href="/categories/#Linux配置">
-      <li>Linux配置</li>
-    </a>
-    
-    <a href="/categories/#日常">
-      <li>日常</li>
-    </a>
-    
-    <a href="/categories/#英语">
-      <li>英语</li>
-    </a>
-    
-    <a href="/categories/#环境">
-      <li>环境</li>
-    </a>
-    
-    <a href="/categories/#读书笔记">
-      <li>读书笔记</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
+          
+          <li>
+            <a href="https://buaaczx.github.io/" target="_blank">BUAA_CZX</a>
+          </li>
+          
+          <li>
+            <a href="https://liboqiao1234.github.io/" target="_blank">Waiting for u...</a>
+          </li>
+          
+          <li>
+            <a href="" target="_blank"></a>
+          </li>
+          
+          <li>
+            <a href="https://hexo.io/" target="_blank">Hexo</a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
   </div>
-</div>
+</article>
+
+
+
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<!-- anchorjs end -->
+
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
@@ -1074,7 +810,7 @@
     let jsdelivr = "https://cdn.jsdelivr.net/gh/";
     let gh = "liboqiao1234";
     let ghPages = gh + ".github.io";
-    let pagePath = "tags/社科/index.html";
+    let pagePath = "anaconda_jupyter/";
     let jsdelivrurl;
     if (pagePath.indexOf("index.html") != -1) {
       jsdelivrurl = jsdelivr + gh + "/" + ghPages;
