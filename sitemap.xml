@@ -372,7 +372,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite-url/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-AI-%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://yoursite-url/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2024-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/tags/AI/</loc>
     <lastmod>2024-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
