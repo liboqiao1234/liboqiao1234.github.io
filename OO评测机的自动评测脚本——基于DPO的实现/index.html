@@ -374,6 +374,10 @@
           <div class="post-heading">
             <div class="tags">
               
+              <a class="tag" href="/tags/#六系生活" title="六系生活">六系生活</a>
+              
+              <a class="tag" href="/tags/#面向对象" title="面向对象">面向对象</a>
+              
             </div>
             <h1>tmp</h1>
             <h2 class="subheading"></h2>
@@ -458,7 +462,7 @@
 <p>上传好后直接F12，控制台复制粘贴然后回车，等待评测即可。（建议关闭控制台Error报错，方便查看log输出的测试结果）</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">if</span>($(<span class="string">&quot;button.css-dev-only-do-not-override-1ae8k9u&quot;</span>)[<span class="number">2</span>].<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;ant-btn-primary&quot;</span>))&#123;$(<span class="string">&quot;button.css-dev-only-do-not-override-1ae8k9u&quot;</span>)[<span class="number">2</span>].<span class="title function_">click</span>()&#125;&#125;,<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
 <p>效果图如下（console）</p>
-<p><img src="/undefined/OO%E8%AF%84%E6%B5%8B%E6%9C%BA%E7%9A%84%E8%87%AA%E5%8A%A8%E8%AF%84%E6%B5%8B%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8EDPO%E7%9A%84%E5%AE%9E%E7%8E%B0/image-20240329153654249.png" alt="image-20240329153654249"></p>
+<p><img src="/OO%E8%AF%84%E6%B5%8B%E6%9C%BA%E7%9A%84%E8%87%AA%E5%8A%A8%E8%AF%84%E6%B5%8B%E8%84%9A%E6%9C%AC%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8EDPO%E7%9A%84%E5%AE%9E%E7%8E%B0/image-20240329153654249.png" alt="image-20240329153654249"></p>
 <h3 id="V1-1-版本更新">V1.1 版本更新</h3>
 <p>note: 支持了错误停止的判断（为了方便chrome使用我压成了一行）</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = $(<span class="string">&quot;button&quot;</span>).<span class="property">length</span>;<span class="keyword">var</span> bts = $(<span class="string">&quot;button&quot;</span>);<span class="keyword">var</span> btn;<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;<span class="keyword">if</span>(bts[i].<span class="property">style</span>[<span class="string">&#x27;background-color&#x27;</span>]==<span class="string">&quot;green&quot;</span>)&#123;btn = bts[i];<span class="keyword">break</span>;&#125;&#125;<span class="keyword">var</span> t=<span class="number">0</span>;btn.<span class="title function_">click</span>();<span class="keyword">const</span> itv = <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">if</span>(btn.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;ant-btn-primary&quot;</span>))&#123;<span class="keyword">if</span>($(<span class="string">&quot;tr&quot;</span>)[<span class="number">1</span>].<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;ant-table-row&quot;</span>))&#123;<span class="title function_">alert</span>(<span class="string">&quot;Wrong! Passed: &quot;</span>+t+<span class="string">&quot;groups&quot;</span>);<span class="built_in">clearInterval</span>(itv);&#125;<span class="keyword">else</span>&#123;t++;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;pass test&quot;</span>+t);btn.<span class="title function_">click</span>();&#125;&#125;&#125;,<span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
@@ -639,6 +643,10 @@
             <a href="/tags/">特色标签</a>
           </h5>
           <div class="tags">
+            
+            <a class="tag" href="/tags/#六系生活" title="六系生活">六系生活</a>
+            
+            <a class="tag" href="/tags/#面向对象" title="面向对象">面向对象</a>
             
           </div>
         </section>

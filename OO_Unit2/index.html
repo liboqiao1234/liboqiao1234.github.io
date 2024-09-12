@@ -374,7 +374,9 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/tags/#OO" title="OO">OO</a>
+              <a class="tag" href="/tags/#六系生活" title="六系生活">六系生活</a>
+              
+              <a class="tag" href="/tags/#面向对象" title="面向对象">面向对象</a>
               
             </div>
             <h1>OO_Unit2</h1>
@@ -469,11 +471,11 @@
 <h3 id="HW5-——-拓展性强的架构">HW5 —— 拓展性强的架构</h3>
 <p>在hw5大框架的时候，我浏览了往届的后续题目，增加了本次作业本来无需存在的dispatcher，以及Elevator接口以快速拓展新类型的电梯（虽然这个接口最后基本没有用上），与此类似的还有Strategy接口，但因为从来没用就在此省略了。</p>
 <h4 id="1-类图">1. 类图</h4>
-<p><img src="/undefined/OO_Unit2/hw5class.png" alt="image-20240419161459655"></p>
+<p><img src="/OO_Unit2/hw5class.png" alt="image-20240419161459655"></p>
 <p>上图展示了HW5作业的类图，架构参考了实验代码的架构，除了省略的Main线程外，共有<strong>3类线程</strong>：InputHdl、Dispatcher、NormElevator；需要被多个线程<strong>共享的对象</strong>有RequestTable一种，分别是1个主表和6个候乘表，另外还有为实现高内聚低耦合，单独列出的Strategy类，主要根据电梯状态和候乘表内容给出电梯下一步的行为，其运行策略选择主流的LOOK算法。</p>
 <h4 id="2-时序图">2. 时序图</h4>
 <p>其实在时序图里看出，我的线程创建是有一点扭曲的，全部在Main里面创建好虽然比较方便，但是考虑到后续交互并不是Main和其他线程或对象，而是这些线程和对象之间，因此需要在main里面调用函数“绑定”这些类或对象，造成了臃肿和潜在的不安全可能，而且为了正确性，InputHdl必须在后面都start好了以后再start，这个隐患留到了hw7才被发现。所以其实比较舒服的方式是在一级线程start以后创建下一级并start。</p>
-<p><img src="/undefined/OO_Unit2/hw5seq.png" alt="image-20240419170504808"></p>
+<p><img src="/OO_Unit2/hw5seq.png" alt="image-20240419170504808"></p>
 <h3 id="HW6-——似是而非的影子电梯">HW6 ——似是而非的影子电梯</h3>
 <p>hw6中取消了请求中对特定电梯的指定，同时新增了RESET请求，可以修改电梯的各项属性（速度、容量），面对这些改变，需要完善的主要就是hw5预留的dispatcher，以及考虑如何实现RESET请求。</p>
 <h4 id="0-改动说明">0. 改动说明</h4>
@@ -481,10 +483,10 @@
 <p>一开始觉得random虽然好写但是应该比较慢，评价函数涉及到复杂的调参，很考验本地数据以及分布，还有互测被人精心卡掉的可能，然后影子电梯好像也挺好写，于是就选择了<strong>影子电梯</strong>——通过深克隆电梯对象，模拟电梯跑到结束的过程，得到用时，通过六个用时谁最短判断把请求分给谁，属于一种局部最优方法，但是最基础的影子电梯没考虑到耗电量等其他指标，只有时间。</p>
 <p>而RESET的实现比较简单，虽然可以走两步再reset，但是考虑到线程之间时间差以及保留容错，我选择直接通过InputHdl传给ElevTable（很多人通过dispatcher就会出现reset被阻塞导致重置不及时的问题），关于电梯里的人以及已经分配好的请求，就都直接重新放进MajorTable，重新分配即可，另外，因为可能把请求扔回MajorTable，所以终止条件需要改变：记录reset数量，以及完成了的reset数量，一旦这两个相等，才能真正结束。</p>
 <h4 id="1-类图-2">1. 类图</h4>
-<p><img src="/undefined/OO_Unit2/hw6class.png" alt="image-20240419193029364"></p>
+<p><img src="/OO_Unit2/hw6class.png" alt="image-20240419193029364"></p>
 <p>红色的线标出了相比HW5新增的关系，对应上一小节说到的<strong>影子电梯</strong>和<strong>reset</strong>的实现.</p>
 <h4 id="2-时序图-2">2. 时序图</h4>
-<p><img src="/undefined/OO_Unit2/hw6seq.png" alt="image-20240419195502554"></p>
+<p><img src="/OO_Unit2/hw6seq.png" alt="image-20240419195502554"></p>
 <p>可见，增加的主要内容就是一个VirElevator以及Reset相关操作。</p>
 <h3 id="HW7-——-因小失大的偷懒设计">HW7 —— 因小失大的偷懒设计</h3>
 <h4 id="0-改动说明-2">0. 改动说明</h4>
@@ -496,10 +498,10 @@
 <p>这次我偷了个懒，在reset的时候直接<strong>把原本的电梯改成下边那半</strong>，再<strong>另外创建上面一半</strong>即可，新增一个<strong>Trans类</strong>让两个电梯共享，防止同时进入换乘层（后来发现其实做的和OS的自旋锁是一个原理…），但这导致了<strong>两个电梯线程地位上不对等</strong>，使得后面会出现种种问题。</p>
 <p>另外，由于上次影子电梯效果不好，这次双轿厢后更为复杂，果断放弃，投奔random，因此重置以后还把原来电梯里的人的请求放回了本电梯对应的Table（在hw6的random基础优化）</p>
 <h4 id="1-类图-3">1. 类图</h4>
-<p><img src="/undefined/OO_Unit2/hw7class.png" alt="image-20240419203456944"></p>
+<p><img src="/OO_Unit2/hw7class.png" alt="image-20240419203456944"></p>
 <p>图中新增的ElevTable1和NormElevator1其实并不是新类，只是方便表达才如此安排。这种设计的好处就是只需要额外创建6个线程，坏处是非常不优雅，而且直接导致了后来我的多个bug，以及很长的debug时长。</p>
 <h4 id="2-时序图-3">2. 时序图</h4>
-<p><img src="/undefined/OO_Unit2/hw7seq.png" alt="image-20240419204121029"></p>
+<p><img src="/OO_Unit2/hw7seq.png" alt="image-20240419204121029"></p>
 <p>此处相比类图，能够比较直观地看出Trans类是如何保证换乘层只有一个电梯的，以及双轿厢如何停止。</p>
 <h2 id="三、调度器">三、调度器</h2>
 <h3 id="1-调度器线程">1. 调度器线程</h3>
@@ -712,7 +714,9 @@
           </h5>
           <div class="tags">
             
-            <a class="tag" href="/tags/#OO" title="OO">OO</a>
+            <a class="tag" href="/tags/#六系生活" title="六系生活">六系生活</a>
+            
+            <a class="tag" href="/tags/#面向对象" title="面向对象">面向对象</a>
             
           </div>
         </section>
