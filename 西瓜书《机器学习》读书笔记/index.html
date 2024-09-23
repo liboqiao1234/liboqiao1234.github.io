@@ -532,7 +532,7 @@ $$<br>
 <p>FP和FN的错误代价可能不对等，所以这个时候就要设定一个代价矩阵:</p>
 <p>令$cost_{ij}$代表将第i类样本预测为第j类的代价。所以算E的时候，就要加上这个参数，以二分类为例：<br>
 $$<br>
-E=\frac{1}{m}(\sum_{\bold{x_i}\in D^+} II(f(\bold{x_i}) \neq y_i)\times cost_{01}+\sum_{\bold{x_i}\in D^-}II(f(\bold{x_i}) \neq y_i)\times cost_{10})<br>
+E=\frac{1}{m}(\sum_{\mathbf{x_i}\in D^+} II(f(\mathbf{x_i}) \neq y_i)\times cost_{01}+\sum_{\mathbf{x_i}\in D^-}II(f(\mathbf{x_i}) \neq y_i)\times cost_{10})<br>
 $$<br>
 D+和D-分别为正例集和反例集。</p>
 
