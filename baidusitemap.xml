@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite-url/%E6%95%B0%E5%AD%A6%E8%A1%A5%E5%85%85/</loc>
+    <lastmod>2024-09-26</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite-url/%E3%80%90%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E3%80%91-BN-Batch-Normalization-Accelerating-Deep-Network-Training-by-Reducing-Internal-Covariate-Shift/</loc>
     <lastmod>2024-09-25</lastmod>
   </url>
