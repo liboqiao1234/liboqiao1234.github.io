@@ -483,6 +483,45 @@ $$
   <!-- top end -->
   
 
+  <a href="/numpy学习记录/">
+    <h2 class="post-title">
+      numpy学习记录
+    </h2>
+    <h3 class="post-subtitle">
+      记录奇技淫巧
+    </h3>
+    <div class="post-content-preview">
+      使用 高级索引
+10.10
+对于SVM中的一个场景：
+现在有一个y  shape为(500, )表示正确的分类
+想要选取scores (其shape为(500, 10) )中每一行y[i]的列，可以直接使用numpy的高级索引方法：
+1score_correct = scores[np.arange(scores.shape[0]) , y].reshape(-1, 1)
+不reshape的......
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+    Posted by UUQ on
+    2024-10-10
+  </p>
+  <div class="tags">
+    
+    <a href="/tags/#学习记录" title="学习记录">学习记录</a>
+    
+  </div>
+  
+
+</div>
+<hr>
+
+<div class="post-preview">
+  
+  <!-- top start (article top hot config) -->
+  
+  <!-- top end -->
+  
+
   <a href="/【论文阅读】Layer-wise/">
     <h2 class="post-title">
       【论文阅读】Layer-wise Conditioning Analysis in Exploring the Learning Dynamics of DNNs
@@ -491,7 +530,8 @@ $$
       
     </h3>
     <div class="post-content-preview">
-      PDF with note
+      这篇文章提出通过层间分析法(layer-wise analysis) 实现在神经网络训练中“debug”，并解释了Batch Norm后的网络到底哪好？
+PDF with note
 ...
     </div>
   </a>
@@ -562,7 +602,7 @@ $$
   <div class="tags">
     
     
-    <a href="/tags/#学习记录" title="学习记录" rel="3">学习记录</a>
+    <a href="/tags/#学习记录" title="学习记录" rel="4">学习记录</a>
     
     
     
@@ -730,6 +770,10 @@ $$
 <div class="widget">
   <ul>
     
+    <a href="../../numpy%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+      <li>numpy学习记录</li>
+    </a>
+    
     <a href="../../%E3%80%90%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E3%80%91Layer-wise/">
       <li>【论文阅读】Layer-wise Conditioning Analysis in Exploring the Learning Dynamics of DNNs</li>
     </a>
@@ -744,10 +788,6 @@ $$
     
     <a href="../../%E3%80%8A%E5%8A%9F%E5%88%A9%E4%B8%BB%E4%B9%89%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
       <li>《功利主义》读书笔记（待完善）</li>
-    </a>
-    
-    <a href="../../%E3%80%90%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E3%80%91Normalization-Techniques-in-Training-DNNs-Methodology-Analysis-and-Application/">
-      <li>【文献阅读】Normalization Techniques in Training DNNs:Methodology, Analysis and Application</li>
     </a>
     
   </ul>
@@ -778,7 +818,7 @@ $$
 
 <h5><a href="/archives/">archives</a></h5>
 <div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../2024/10/">October 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/09/">September 2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/08/">August 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/07/">July 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/06/">June 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/04/">April 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/03/">March 2024</a><span class="archive-list-count">7</span></li></ul>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../2024/10/">October 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/09/">September 2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/08/">August 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/07/">July 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/06/">June 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/04/">April 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/03/">March 2024</a><span class="archive-list-count">7</span></li></ul>
 </div>
 
 
@@ -836,6 +876,10 @@ $$
     
     <a href="/categories/#金融">
       <li>金融</li>
+    </a>
+    
+    <a href="/categories/#学习记录">
+      <li>学习记录</li>
     </a>
     
   </ul>
