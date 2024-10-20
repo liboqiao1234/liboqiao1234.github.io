@@ -395,7 +395,7 @@
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">944</span> In Total
+              Words <span class="post-count">1k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -517,6 +517,19 @@ $$<br>
 <p>（略去很多PCA中的数学推导，还没研究）</p>
 <p>通过找到协方差矩阵中最大的d个特征向量（对应最大的方差），就可以降维了。但是样本量很大的时候这样太慢了。</p>
 <p>有一些SVD的实现算法（但我并不了解）可以不先求$X^TX$，也能求出右奇异矩阵V，这样就有了特征值和特征向量。</p>
+<h2 id="克罗内克内积-Kronecker-product">克罗内克内积 Kronecker product</h2>
+<p>对于两个矩阵$A(m\times n), B(p\times q)$，A和B的K内积定义为：</p>
+<p>$$<br>
+A\otimes B =<br>
+\left(<br>
+\begin{matrix}<br>
+a_{11}B &amp; … &amp; a_{1n}B \<br>
+\vdots &amp; \ddots &amp; \vdots \<br>
+a_{m1}B &amp; … &amp; a_{mn}B<br>
+\end{matrix}<br>
+\right)<br>
+$$</p>
+<p>是一个$(mp\times nq)$的分块矩阵。</p>
 <h1>中英对照</h1>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">moment</a> : 矩  （一阶矩、二阶矩：概统）</p>
 
@@ -667,7 +680,7 @@ $$<br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">线性代数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">矩阵求导</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">特征值和特征向量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">特征值分解</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spectrum-%E8%B0%B1"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Spectrum 谱</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%A5%87%E5%BC%82%E9%98%B5"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">奇异阵</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3-SVD"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">奇异值分解 SVD</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%B1%82%E8%A7%A3-U-%E5%92%8C-V"><span class="toc-nav-number">1.2.4.1.</span> <span class="toc-nav-text">求解 U 和 V</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#SVD-%E5%BA%94%E7%94%A8%E4%B9%8B-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA"><span class="toc-nav-number">1.2.4.2.</span> <span class="toc-nav-text">SVD 应用之 主成分分析 (PCA)</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">中英对照</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">线性代数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">矩阵求导</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">特征值和特征向量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">特征值分解</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spectrum-%E8%B0%B1"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Spectrum 谱</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%A5%87%E5%BC%82%E9%98%B5"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">奇异阵</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3-SVD"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">奇异值分解 SVD</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%B1%82%E8%A7%A3-U-%E5%92%8C-V"><span class="toc-nav-number">1.2.4.1.</span> <span class="toc-nav-text">求解 U 和 V</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#SVD-%E5%BA%94%E7%94%A8%E4%B9%8B-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA"><span class="toc-nav-number">1.2.4.2.</span> <span class="toc-nav-text">SVD 应用之 主成分分析 (PCA)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%85%8B%E7%BD%97%E5%86%85%E5%85%8B%E5%86%85%E7%A7%AF-Kronecker-product"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">克罗内克内积 Kronecker product</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">中英对照</span></a></li></ol>
         
         </div>
       </aside>
