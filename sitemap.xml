@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite-url/%E6%88%91%E5%AE%9E%E7%8E%B0%E4%BA%86%E7%AC%AC%E4%B8%80%E6%AC%A1xss%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB0/</loc>
+    
+    <lastmod>2025-01-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite-url/ldsafkjldskf;ldksjf;kl/index.html</loc>
     
     <lastmod>2024-10-20</lastmod>
@@ -577,6 +586,20 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://yoursite-url/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/tags/%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -665,6 +688,13 @@
   
   <url>
     <loc>http://yoursite-url/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/categories/web/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
