@@ -16,9 +16,9 @@ function blinkPostContent(times){
     times = times*1000;
     setInterval(()=>{
         if (document.querySelector('.post-content').style.display !== 'none'){
-            document.querySelector('.post-content').style.display = '';
-        } else {
             document.querySelector('.post-content').style.display = 'none';
+        } else {
+            document.querySelector('.post-content').style.display = '';
         }
     }, times);
 }
