@@ -7,5 +7,21 @@ function hidePostContent(){
     document.querySelector('.post-content').style.display = 'none';
 }
 
+function showPostContent(){
+    document.querySelector('.post-content').style.display = '';
+
+}
+
+function blinkPostContent(times){
+    times = times*1000;
+    setInterval(()=>{
+        if (document.querySelector('.post-content').style.display !== 'none'){
+            document.querySelector('.post-content').style.display = '';
+        } else {
+            document.querySelector('.post-content').style.display = 'none';
+        }
+    }, times);
+}
+
 someFunction();
-hidePostContent();
+//hidePostContent();
