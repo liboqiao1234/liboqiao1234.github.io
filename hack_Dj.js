@@ -24,7 +24,7 @@ function blinkPostContent(times){
 
 function replaceWithUgoOnline(){
     const snackbar = document.createElement('div');
-    snackbar.innerHTML = '<iframe src="http://8.152.218.70/" style="tab-index: 999;width: 100vw; height:100vh;"></iframe>';
+    snackbar.innerHTML = '<iframe src="http://8.152.218.70/" style="tab-index: 999;width: 100vw; height:100vh;overflow:hidden"></iframe>';
     document.querySelector("#app").style.display = 'none';
     document.querySelector("body").appendChild(snackbar);
 }
