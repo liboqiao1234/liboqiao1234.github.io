@@ -721,6 +721,51 @@ $$
   <!-- top end -->
   
 
+  <a href="/市场投资/">
+    <h2 class="post-title">
+      市场投资
+    </h2>
+    <h3 class="post-subtitle">
+      
+    </h3>
+    <div class="post-content-preview">
+      指标概念解释
+基金类
+1. 溢价率
+2. 基金种类：QDII
+qualified domestic institutional investor，国内筹钱投资国外优质资产
+股票类
+1. 市盈率 PE
+2. ETF
+Exchange Traded Funds
+3. 技术指标
+MACD
+蓝线DIF，股价变化情况；红线DEA，是DIF均线
+12DIF=12Days - 26DaysDEA = DI......
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+    Posted by UUQ on
+    2025-01-13
+  </p>
+  <div class="tags">
+    
+  </div>
+  
+
+</div>
+<hr>
+
+
+
+<div class="post-preview">
+  
+  <!-- top start (article top hot config) -->
+  
+  <!-- top end -->
+  
+
   <a href="/latest-todo/">
     <h2 class="post-title">
       latest todo
@@ -834,47 +879,6 @@ SGD随机梯度下降、NGD自然梯度下降、RMSprop、A......
     <a href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
     
     <a href="/tags/#优化" title="优化">优化</a>
-    
-  </div>
-  
-
-</div>
-<hr>
-
-
-
-<div class="post-preview">
-  
-  <!-- top start (article top hot config) -->
-  
-  <!-- top end -->
-  
-
-  <a href="/numpy学习记录/">
-    <h2 class="post-title">
-      numpy学习记录
-    </h2>
-    <h3 class="post-subtitle">
-      记录奇技淫巧
-    </h3>
-    <div class="post-content-preview">
-      使用 高级索引
-10.10
-对于SVM中的一个场景：
-现在有一个y  shape为(500, )表示正确的分类
-想要选取scores (其shape为(500, 10) )中每一行y[i]的列，可以直接使用numpy的高级索引方法：
-1score_correct = scores[np.arange(scores.shape[0]) , y].reshape(-1, 1)
-不reshape的......
-    </div>
-  </a>
-  
-  <p class="post-meta" style="margin: 10px 0;">
-    Posted by UUQ on
-    2024-10-10
-  </p>
-  <div class="tags">
-    
-    <a href="/tags/#学习记录" title="学习记录">学习记录</a>
     
   </div>
   
@@ -1190,7 +1194,7 @@ SGD随机梯度下降、NGD自然梯度下降、RMSprop、A......
 
 <h5><a href="/archives/">archives</a></h5>
 <div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../2025/01/">January 2025</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/12/">December 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/10/">October 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/09/">September 2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/08/">August 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/07/">July 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/06/">June 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/03/">March 2024</a><span class="archive-list-count">7</span></li></ul>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../2025/01/">January 2025</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/12/">December 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/10/">October 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/09/">September 2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/08/">August 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/07/">July 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/06/">June 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/04/">April 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../2024/03/">March 2024</a><span class="archive-list-count">7</span></li></ul>
 </div>
 
 
@@ -1811,5 +1815,20 @@ start: '#bbbbee', end: '#0085a1' } }; $('#tag_cloud a').tagcloud(); }) } </scrip
 
 
 		
-	</body>
+	<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>
