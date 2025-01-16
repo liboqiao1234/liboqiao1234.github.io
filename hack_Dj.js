@@ -115,6 +115,12 @@ const begToUUQ = ()=>{
     
 };
 
+const noUseAiou = ()=>{
+    inner = document.querySelector('.post-content').innerHTML.replace('uuq','django声称有人').replace('才是','和buaaczx都是')
+    document.querySelector('.post-content').innerHTML = inner.replace('月半喵喵喵','我和buaaczx')
+
+}
+
 
 someFunction();
 //hidePostContent();
