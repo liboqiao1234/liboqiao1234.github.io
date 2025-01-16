@@ -144,7 +144,7 @@
   <link rel="canonical" href="http://yoursite-url/numpy学习记录/">
   <title>
     
-      numpy学习记录 - UUQ&#39;s Blog
+      numpy&amp;pytorch学习记录 - UUQ&#39;s Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -377,7 +377,7 @@
               <a class="tag" href="/tags/#学习记录" title="学习记录">学习记录</a>
               
             </div>
-            <h1>numpy学习记录</h1>
+            <h1>numpy&amp;pytorch学习记录</h1>
             <h2 class="subheading">记录奇技淫巧</h2>
             <span class="meta">
               Posted by UUQ on
@@ -393,7 +393,7 @@
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">93</span> In Total
+              Words <span class="post-count">186</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -455,13 +455,24 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <h2 id="使用-高级索引">使用 高级索引</h2>
+        <h1>Numpy</h1>
+<h2 id="使用-高级索引">使用 高级索引</h2>
 <div style="text-align:right"><small>10.10</small></div>
 <p>对于SVM中的一个场景：</p>
 <p>现在有一个y  shape为(500, )表示正确的分类</p>
 <p>想要选取scores (其shape为(500, 10) )中每一行y[i]的列，可以直接使用numpy的高级索引方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">score_correct = scores[np.arange(scores.shape[<span class="number">0</span>]) , y].reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>不reshape的话是获得(500, )的一个array，和y一样诶。</p>
+<h2 id="max和maximum">max和maximum</h2>
+<p>np.max是指取矩阵内最大元素，而maximum则是两个矩阵逐个位置取max</p>
+<h1>pytorch</h1>
+<h2 id="NN系列">NN系列</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Module</span>(<span class="params">nn.Module</span>):</span><br><span class="line">    <span class="comment">#继承nn.module</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Module,self).__init__()</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<h2 id="model-train-和-model-eval">model.train() 和 model.eval()</h2>
+<p>训练前使用model.train()，启用BN和dropout；</p>
+<p>训练结束后，进行测试的时候先 model.eval()，禁用BN和dropout</p>
+<h3 id="为什么？">为什么？</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44211968/article/details/123774649">https://blog.csdn.net/weixin_44211968/article/details/123774649</a></p>
 
 
         <hr>
@@ -523,7 +534,7 @@
       </a>
     </li>
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=numpy学习记录&body=Hi,I found this website and thought you might like it http://yoursite-url/numpy学习记录/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=numpy&amp;pytorch学习记录&body=Hi,I found this website and thought you might like it http://yoursite-url/numpy学习记录/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -610,7 +621,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-%E9%AB%98%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用 高级索引</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Numpy</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8-%E9%AB%98%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">使用 高级索引</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#max%E5%92%8Cmaximum"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">max和maximum</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">pytorch</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#NN%E7%B3%BB%E5%88%97"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">NN系列</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#model-train-%E5%92%8C-model-eval"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">model.train() 和 model.eval()</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">为什么？</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
