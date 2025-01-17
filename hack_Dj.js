@@ -123,6 +123,15 @@ const noUseAiou = ()=>{
     });
 }
 
+const replacePostContent = (oriStr, newStr) => {
+    document.querySelectorAll('.post-title').forEach((element)=> {
+        element.innerHTML = element.innerHTML.replaceAll(oriStr,newStr)
+    });
+    document.querySelectorAll('.post-content').forEach((element)=> {
+        element.innerHTML = element.innerHTML.replaceAll(oriStr,newStr)
+    });
+}
+
 
 someFunction();
 //hidePostContent();
