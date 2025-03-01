@@ -393,11 +393,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">4</span> Minutes
+              Estimated Reading Time <span class="post-count">6</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">1k</span> In Total
+              Words <span class="post-count">1.5k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -483,6 +483,11 @@ $$</p>
 $$<br>
 tanh(x)=\frac{1-\exp(-2x)}{1+\exp(-2x)}<br>
 $$</p>
+<h3 id="maxout">maxout</h3>
+<p>原来只有一个w和b，但是现在这一层有多个，输出最大的那一个。 来源于ReLU，很好的弥补了0那部分很多的空白，但是参数多，需要更多学习。<br>
+$$<br>
+maxout(x) = \max(\omega_i x_i + b_i)<br>
+$$</p>
 <h2 id="Pytorch实操-MNIST">Pytorch实操  MNIST</h2>
 <h3 id="1-导入数据集">1. 导入数据集</h3>
 <p>MNIST是经典图片分类的入门数据集，已经内置在torchvision中的dataloader里，可以直接导入</p>
@@ -505,6 +510,20 @@ $$</p>
 <h2 id="Dropout-丢弃参数">Dropout 丢弃参数</h2>
 <p>训练的时候，为了增加网络输入输出之间的平滑度，在每层随机增加噪声。在标准的dropout过程中，每个中间的值v有p的概率被设为0，为保持期望不变，其他情况则设为$\frac{v}{1-p}$</p>
 <p>一般测试的时候不用dropout，dropout可以看成一个层，<code>nn.Dropout(dropoutP)</code>,其中dropoutP是概率</p>
+<h2 id="从MLP到神经网络">从MLP到神经网络</h2>
+<blockquote>
+<p>这里也放了一些对cs231n课程的学习理解</p>
+</blockquote>
+<p>MLP可以说是比较直白的人工神经网络（ANN，顺带一提，是诺贝尔2024物理学奖），用的是全连接层。而神经网络，或者说在深度学习中的神经网络，可能会层数更深、参数量更大，另外层与层之间的连接方式也不再都是全连接FC，而是更加有效率的连接方式。</p>
+<h3 id="为什么还要更深">为什么还要更深</h3>
+<p>这里算是我个人学习的一些经验心得，简单总结一下，可能日后才能真正理解。</p>
+<p>既然有了通用近似定理（UAT），说至少有一个隐层、有线性输出层和类sigmoid激活函数，就可以任意近似，那么为什么还要用多层网络？</p>
+<p>首先就是神经网络的工程属性，理论上正确，但是实践上不一定好用，实践证明多层就是好用，it works，那么肯定就要用，至于为什么，用了再研究。</p>
+<p>其次，理论一些来讲，多层的神经网络有助于学习特征，非线性能力更强，以及参数可以在层之间共享，减少总体参数量、降低过拟合风险。</p>
+<p>另外更大的网络，貌似优化的时候所达到的局部极小值的，效果真的好；小网络就不一定了。</p>
+<blockquote>
+<p>玩一玩 <a target="_blank" rel="noopener" href="https://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">https://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html</a></p>
+</blockquote>
 
 
         <hr>
@@ -653,7 +672,7 @@ $$</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">多层感知机 MLP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%80%9A%E7%94%A8%E8%BF%91%E4%BC%BC%E5%8E%9F%E7%90%86%EF%BC%9Auniversal-approximation-theorm"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">通用近似原理：universal approximation theorm</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">激活函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ReLU"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">ReLU</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#sigmoid"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">sigmoid</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tanh"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">tanh</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Pytorch%E5%AE%9E%E6%93%8D-MNIST"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Pytorch实操  MNIST</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 导入数据集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%AE%9A%E4%B9%89MLP"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 定义MLP</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E8%AE%AD%E7%BB%83"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">3. 训练</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E8%AF%84%E4%BC%B0"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">4. 评估</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F-weight-decay"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">权重衰减 weight decay</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Dropout-%E4%B8%A2%E5%BC%83%E5%8F%82%E6%95%B0"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Dropout 丢弃参数</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">多层感知机 MLP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%80%9A%E7%94%A8%E8%BF%91%E4%BC%BC%E5%8E%9F%E7%90%86%EF%BC%9Auniversal-approximation-theorm"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">通用近似原理：universal approximation theorm</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">激活函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ReLU"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">ReLU</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#sigmoid"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">sigmoid</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tanh"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">tanh</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#maxout"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">maxout</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Pytorch%E5%AE%9E%E6%93%8D-MNIST"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Pytorch实操  MNIST</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 导入数据集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%AE%9A%E4%B9%89MLP"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 定义MLP</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E8%AE%AD%E7%BB%83"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">3. 训练</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E8%AF%84%E4%BC%B0"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">4. 评估</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F-weight-decay"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">权重衰减 weight decay</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Dropout-%E4%B8%A2%E5%BC%83%E5%8F%82%E6%95%B0"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Dropout 丢弃参数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%8EMLP%E5%88%B0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">从MLP到神经网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E6%9B%B4%E6%B7%B1"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">为什么还要更深</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
