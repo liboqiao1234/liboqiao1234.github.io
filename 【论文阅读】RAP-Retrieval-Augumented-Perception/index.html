@@ -141,10 +141,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://yoursite-url/【文献阅读】Normalization-Techniques-in-Training-DNNs-Methodology-Analysis-and-Application/">
+  <link rel="canonical" href="http://yoursite-url/【论文阅读】RAP-Retrieval-Augumented-Perception/">
   <title>
     
-      【文献阅读】Normalization Techniques in Training DNNs:Methodology, Analysis and Application - UUQ&#39;s Blog
+      【论文阅读】RAP(Retrieval Augumented Perception) - UUQ&#39;s Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -378,14 +378,12 @@
               
               <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
               
-              <a class="tag" href="/tags/#文献阅读" title="文献阅读">文献阅读</a>
-              
             </div>
-            <h1>【文献阅读】Normalization Techniques in Training DNNs:Methodology, Analysis and Application</h1>
+            <h1>【论文阅读】RAP(Retrieval Augumented Perception)</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
               Posted by UUQ on
-              2024-09-23
+              2025-03-19
             </span>
 
 
@@ -393,11 +391,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">1</span> Minutes
+              Estimated Reading Time <span class="post-count">4</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">173</span> In Total
+              Words <span class="post-count">1k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -459,29 +457,73 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2009.12836">https://arxiv.org/abs/2009.12836</a></p>
-<p>TRAMI 2023</p>
+        <h1>Retrieval-Augmented Perception: High-Resolution Image Perception Meets Visual RAG</h1>
+<h2 id="0-Brief-takeways">0. Brief takeways</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2503.01222">arxiv 2503.01222</a></p>
 </blockquote>
-<p>针对DNN中的Normalization技术的一篇综述。</p>
-<p>五种方法：</p>
+<p>对于多模态大语言模型MLLMs对高分辨率图像感知HR image perception任务中，利用类似RAG的方法实现。</p>
+<p>方法： Crops分块 + VisRAG确定余弦相似度s + Spatial-Awareness layout 保留位置关系，然后不被选中位置留空，删除全空行和列 + RE-search（类A*） 确定最优的topk 。</p>
+<h2 id="1-Intro-Related-work">1. Intro  &amp; Related work</h2>
+<p>MLLM现在对图像的处理，大多都是fixed resolution。如果处理高分辨率图像，会面临shape distortion、blurring的问题。</p>
+<p>现在基本上有三类方法：<strong>cropped based，HR visual encoder，search based</strong>。</p>
+<p>前两种不可避免下采样，丢失细节。</p>
+<p>第三个也有一些问题：采用的top-down搜索方法，先不下采样，分块查询（貌似是这样，有待确认），但是小物体（或者特征不是那么明显）的感知就容易在前段直接出错了。</p>
+<p>作者认为要想提升HR image的感知能力，最好能实现MLLM的长上下文能力——于是想到了RAG，于是提出了本文的核心问题：</p>
+<p><strong>Is it possible to directly enhance the long-context capability of MLLMs using RAG, as in general LLMs, to overcome the limitations of existing HR perception methods?</strong></p>
+<p>随之而来的两个关键问题：切成小块以后这些图片怎么摆？要用多少个crops？</p>
+<h3 id="小结论">小结论</h3>
+<h4 id="1-怎么排RAG后的crop结果最好？">1. 怎么排RAG后的crop结果最好？</h4>
+<p>三种方法：1. 按相关度高低顺序  2. 按原始顺序（这个是哪里的原始顺序？） 3. 保留他们的相对位置关系（how？）</p>
+<p>结论：<strong>方法3最好</strong></p>
+<h4 id="2-多少个crops好？">2. 多少个crops好？</h4>
+<p>和task有关</p>
+<p>对于单图任务，小数目即可，多了可能反而差<br>
+对于跨图片感知：中等数目，不高不低最合适。</p>
+<h4 id="3-如何设计一个RAG系统，用来提升MLLM对HR-image的perception？">3. 如何设计一个RAG系统，用来提升MLLM对HR image的perception？</h4>
+<p>提出 Retrieval-Augmented Perception（RAP） 框架。</p>
+<img src="/%E3%80%90%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E3%80%91RAP-Retrieval-Augumented-Perception/image-20250319170724142.png" alt="image-20250319170724142" style="width:50%;">
+<p>具体来说：VisRAG计算query和图片相似度 + Spatial-Awareness Layout（本文提出）+ RE-search（确定number）</p>
+<p>VisRAG topk —— S-A Layout —— Construct RE-Tree —— search on Tree</p>
+<h3 id="贡献">贡献</h3>
 <ol>
-<li></li>
-<li></li>
+<li>第一个用RAG 增强MLLM 的HR image 感知，并强调保持原来的相对位置关系以及对crops数目的探索</li>
+<li>RAP框架，training free，包含Spatial-Awareness Layout和RE-search</li>
+<li>实验结果：HR image benchmark上平均24%提升，general MLLM benchmark也有提升。</li>
 </ol>
-<h2 id="补充知识">补充知识</h2>
-<h3 id="Fisher-information">Fisher information</h3>
-<p>补充 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649319256">知乎</a></p>
-<p>使用K-FAC近似估计网络的FIM</p>
-<h3 id="梯度消失和梯度爆炸">梯度消失和梯度爆炸</h3>
-<h4 id="梯度消失">梯度消失</h4>
-<p>反向传播时，由于网络层数可能较多、选择的激活函数特性等原因使得梯度越来越小，导致接近于零，某些权重无法更新。</p>
-<h4 id="梯度爆炸">梯度爆炸</h4>
-<p>反向传播时，梯度越传越大，网络参数不稳定。</p>
-<h4 id="解决方法">解决方法</h4>
-<p>减少网络层数、更换激活函数、增加/减小学习率、batch Normalization、残差网络、L1 L2正则化、梯度裁剪等。</p>
-<h3 id="Covariate-shift">Covariate shift</h3>
-<p><a href="/【文献阅读】Normalization-Techniques-in-Training-DNNs-Methodology-Analysis-and-Application/2009.12836v1.pdf">PDF with notes</a></p>
+<h2 id="pre-Research">pre Research</h2>
+<h3 id="1-相似度">1. 相似度</h3>
+<p>图像V分块，然后用余弦相似度计算分数：<br>
+$$<br>
+s(q,V)=(1-\frac{q\cdot V^T}{||q||\cdot ||V||})\cdot \frac{1}{2}<br>
+$$</p>
+<h3 id="2-Layout方法">2. Layout方法</h3>
+<p>按分数、按crops在原来分块后crops中的序号（我理解是这样）、保持相对位置关系（这个到底怎么实现）</p>
+<p><strong>结果</strong>： 在 LLaVA-v1.6-7B + HR-Bench上，出现了FSP（fine-grained single-instance perception）表现大幅提升，但是FCP(cross-instance) 明显下滑，三者之中表现最好的是方法3。</p>
+<img src="/%E3%80%90%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E3%80%91RAP-Retrieval-Augumented-Perception/image-20250319201702226.png" alt="image-20250319201702226" style="width:50%;">
+<p>原文下一个section详细介绍了怎么实现这个保持相对位置关系，就是设了一个01矩阵M，1表示保留，实际上就是s比较大的会被保留，然后把全0行和全0列全删了，留下一个新的矩形图片。</p>
+<h3 id="3-使用的数量">3. 使用的数量</h3>
+<p>LLaVA-v1.5 、 LLaVA-v1.6 的7B和13B，一共四个模型。</p>
+<p>看起来用的是HR-Bench 4k</p>
+<p>很神奇的是，他只有1.6的版本有出现FSP的先提升后下降，尤其是这个拐点，为什么不做一组Num=3的呢。</p>
+<img src="/%E3%80%90%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E3%80%91RAP-Retrieval-Augumented-Perception/image-20250319202001387.png" alt="image-20250319202001387" style="width:40%;">
+<h3 id="4-RE-search">4. RE-search</h3>
+<p>用来找出最优的k（喂给MLLM crop的数量），现有搜索方法要么低效（全部遍历）、要么不够robust（蒙特卡洛）</p>
+<p>这里基于A*的启发式搜索算法，给出他们的RE-search。</p>
+<p>A*算法中的g函数和h函数，在这里被定义为了<strong>平均相似度</strong>和 <strong>不确定度</strong>，然后用一个随着depth增加而增加的w（因为最开始搜索出来的）来分配权重。</p>
+<p>$$<br>
+f(t_s)=(1-w)\cdot g(t_s)+w\cdot h(t_s)\<br>
+w=(1-b)\cdot(1-\frac{1}{d})^2+b~~~(b=0.2 ~here)\<br>
+g(t_s)=\frac{1}{n}\sum_{i=1}^{n}s(q,v_i)\<br>
+h(t_s)=1-P_{\theta}(‘YES’|p_h(q),V)<br>
+$$</p>
+<h2 id="实验">实验</h2>
+<h3 id="benchmark">benchmark</h3>
+<h2 id="质疑">质疑</h2>
+<ol>
+<li>如果对应的内容在原始HR图片中被crop成了多个块，怎么办呢。</li>
+<li>LLaVA</li>
+</ol>
 
 
         <hr>
@@ -489,12 +531,12 @@
         <ul class="pager">
           
           <li class="previous">
-            <a href="/《功利主义》读书笔记/" data-toggle="tooltip" data-placement="top" title="《功利主义》读书笔记（待完善）">&larr; Previous Post</a>
+            <a href="/【论文阅读】Beyond-Retrieval-Embracing-Compressive-Memory-in-Real-World/" data-toggle="tooltip" data-placement="top" title="【论文阅读】Beyond Retrieval: Embracing Compressive Memory in Real-World">&larr; Previous Post</a>
           </li>
           
           
           <li class="next">
-            <a href="/9-17-学习记录/" data-toggle="tooltip" data-placement="top" title="9.17 学习记录">Next Post &rarr;</a>
+            <a href="/【读书笔记】资本主义与自由/" data-toggle="tooltip" data-placement="top" title="【读书笔记】资本主义与自由">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -543,7 +585,7 @@
       </a>
     </li>
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=【文献阅读】Normalization Techniques in Training DNNs:Methodology, Analysis and Application&body=Hi,I found this website and thought you might like it http://yoursite-url/【文献阅读】Normalization-Techniques-in-Training-DNNs-Methodology-Analysis-and-Application/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【论文阅读】RAP(Retrieval Augumented Perception)&body=Hi,I found this website and thought you might like it http://yoursite-url/【论文阅读】RAP-Retrieval-Augumented-Perception/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -577,7 +619,7 @@
       repo: '',
       owner: '',
       admin: '',
-      id: 'Mon Sep 23 2024 20:37:53 GMT+0800', // Ensure uniqueness and length less than 50
+      id: 'Wed Mar 19 2025 16:09:46 GMT+0800', // Ensure uniqueness and length less than 50
       distractionFreeMode: false, // Facebook-like distraction free mode
       perPage: 10,
       pagerDirection: 'last',
@@ -630,7 +672,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">补充知识</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Fisher-information"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Fisher information</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">梯度消失和梯度爆炸</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">梯度消失</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">梯度爆炸</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">解决方法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Covariate-shift"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Covariate shift</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Retrieval-Augmented Perception: High-Resolution Image Perception Meets Visual RAG</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#0-Brief-takeways"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">0. Brief takeways</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Intro-Related-work"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">1. Intro  &amp; Related work</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B0%8F%E7%BB%93%E8%AE%BA"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">小结论</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-%E6%80%8E%E4%B9%88%E6%8E%92RAG%E5%90%8E%E7%9A%84crop%E7%BB%93%E6%9E%9C%E6%9C%80%E5%A5%BD%EF%BC%9F"><span class="toc-nav-number">1.2.1.1.</span> <span class="toc-nav-text">1. 怎么排RAG后的crop结果最好？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-%E5%A4%9A%E5%B0%91%E4%B8%AAcrops%E5%A5%BD%EF%BC%9F"><span class="toc-nav-number">1.2.1.2.</span> <span class="toc-nav-text">2. 多少个crops好？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AARAG%E7%B3%BB%E7%BB%9F%EF%BC%8C%E7%94%A8%E6%9D%A5%E6%8F%90%E5%8D%87MLLM%E5%AF%B9HR-image%E7%9A%84perception%EF%BC%9F"><span class="toc-nav-number">1.2.1.3.</span> <span class="toc-nav-text">3. 如何设计一个RAG系统，用来提升MLLM对HR image的perception？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%B4%A1%E7%8C%AE"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">贡献</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pre-Research"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">pre Research</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E7%9B%B8%E4%BC%BC%E5%BA%A6"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 相似度</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Layout%E6%96%B9%E6%B3%95"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. Layout方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">3. 使用的数量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-RE-search"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">4. RE-search</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">实验</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#benchmark"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">benchmark</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%B4%A8%E7%96%91"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">质疑</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -656,8 +698,6 @@
             <a class="tag" href="/tags/#AI" title="AI">AI</a>
             
             <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
-            
-            <a class="tag" href="/tags/#文献阅读" title="文献阅读">文献阅读</a>
             
           </div>
         </section>
@@ -859,7 +899,7 @@
     let jsdelivr = "https://cdn.jsdelivr.net/gh/";
     let gh = "liboqiao1234";
     let ghPages = gh + ".github.io";
-    let pagePath = "【文献阅读】Normalization-Techniques-in-Training-DNNs-Methodology-Analysis-and-Application/";
+    let pagePath = "【论文阅读】RAP-Retrieval-Augumented-Perception/";
     let jsdelivrurl;
     if (pagePath.indexOf("index.html") != -1) {
       jsdelivrurl = jsdelivr + gh + "/" + ghPages;
