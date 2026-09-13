@@ -2,6 +2,18 @@
 
 基于 [Academic Pages](https://github.com/academicpages/academicpages.github.io)。
 
+## 日常写博客：两个命令
+
+在 `E:\blogs` 中运行：
+
+```powershell
+.\new-post.cmd "文章标题"
+# 编辑并保存刚生成的 _posts/*.md，然后发布：
+.\publish.cmd
+```
+
+两个脚本也可以双击使用。新文章自动进入 Blog 页面；发布脚本会提交并上传整个网站仓库内的修改，由 GitHub 自动构建上线。日常使用只需要现有的 Python 和 Git，不需要 Ruby。标签、图片、检查命令和故障处理见 [写作说明](docs/WRITING.md)。仓库内也保留了 `scripts/new-post.cmd`、`scripts/publish.cmd` 两个入口。
+
 ## 网站结构
 
 - `/`：学术首页；编辑 `_pages/about.md`。

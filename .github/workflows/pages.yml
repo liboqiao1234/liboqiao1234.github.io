@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check local writing and publishing tools
+        run: python3 -m unittest discover -s tests -v
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
