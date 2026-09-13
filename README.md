@@ -18,7 +18,7 @@
 
 ## 本地预览
 
-安装 Ruby 3.3 和 Bundler 后：
+安装 Ruby 3.3 和 Bundler 后（Windows 请使用包含 Devkit 的 RubyInstaller，并完成 MSYS2 开发工具安装）：
 
 ```sh
 bundle install
