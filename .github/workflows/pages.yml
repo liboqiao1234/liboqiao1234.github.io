@@ -28,6 +28,23 @@ jobs:
           JEKYLL_ENV: production
       - name: Check preserved blog and generated pages
         run: python3 scripts/check_site.py _site
+      - name: Save homepage and blog preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-preview
+          retention-days: 7
+          path: |
+            _site/index.html
+            _site/blog/index.html
+            _site/assets/css/
+            _site/assets/fonts/
+            _site/assets/webfonts/
+            _site/assets/js/main.min.js
+            _site/assets/js/blog-search.js
+            _site/images/profile.jpg
+            _site/images/favicon*
+            _site/images/apple-touch-icon-180x180.png
+            _site/images/manifest.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
