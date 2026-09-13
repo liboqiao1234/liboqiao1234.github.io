@@ -157,7 +157,14 @@ def publish(root: Path, message: str | None = None, check_only: bool = False) ->
         raise BlogError("无法比较本地与远程历史；未进行上传。")
     validate_posts(root)
     print("正在上传 main……", flush=True)
-    git.run("push", "origin", "main")
+    pushed = git.run("push", "origin", "main", check=False)
+    if pushed.returncode:
+        # A proxy can lose the successful response or replay the same push.
+        remote = git.run("ls-remote", "--heads", "origin", "main", check=False)
+        head = git.run("rev-parse", "HEAD").stdout.strip()
+        if remote.returncode or remote.stdout.split()[:1] != [head]:
+            raise BlogError(f"上传未能确认成功：\n{pushed.stderr.strip()}\n本地提交仍保留；网络恢复后重新运行 publish.cmd 即可。")
+        print("已核对远程版本，GitHub 已收到本次提交。", flush=True)
     print(f"上传完成。GitHub 会自动构建并发布；构建失败时旧版本仍在线。\n网站：{SITE_URL}\n构建状态：{ACTIONS_URL}", flush=True)
 
 
@@ -189,4 +196,10 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    exit_code = main()
+    if len(sys.argv) == 2 and sys.stdin.isatty():
+        try:
+            input("\n按 Enter 结束。")
+        except (KeyboardInterrupt, EOFError):
+            pass
+    raise SystemExit(exit_code)

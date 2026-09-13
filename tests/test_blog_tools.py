@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location("blog_tools", Path(__file__).resolve().parents[1] / "scripts/blog.py")
 blog = importlib.util.module_from_spec(spec)
@@ -108,6 +109,20 @@ class BlogToolsTests(unittest.TestCase):
         blog.publish(self.repo)
         self.assertEqual((self.repo / "remote-note.md").read_text(), "Remote update\n")
         self.assertIn(post.name, git(self.remote, "ls-tree", "-r", "--name-only", "main"))
+
+    def test_lost_push_response_is_checked_against_remote(self):
+        self.ready_post()
+        real_run = blog.Git.run
+
+        def lost_response(instance, *args, **kwargs):
+            result = real_run(instance, *args, **kwargs)
+            if args[:2] == ("push", "origin") and result.returncode == 0:
+                return subprocess.CompletedProcess(result.args, 1, result.stdout, "The successful push response was lost")
+            return result
+
+        with patch.object(blog.Git, "run", lost_response):
+            blog.publish(self.repo)
+        self.assertEqual(git(self.remote, "rev-parse", "main"), git(self.repo, "rev-parse", "HEAD"))
 
     def test_conflict_restores_local_commit_without_overwriting_remote(self):
         other = self.writer()
