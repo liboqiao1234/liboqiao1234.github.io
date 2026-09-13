@@ -1,0 +1,528 @@
+[
+  {
+    "title": "【论文阅读】Memory for LLMs 综述",
+    "url": "/【论文阅读】Memory-for-LLMs-综述/",
+    "date": "2025-05-24",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "这个全图其实没什么太大意义，毕竟是综述，所以摆在这了。"
+  },
+  {
+    "title": "Memory for LLM",
+    "url": "/Memory-for-LLM/",
+    "date": "2025-05-03",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "LLM的爆火已不必多说，但LLM在当前阶段，仍然存在着上下文窗口有限的问题。在chatbot等场景中，为了让对话保持自然，让LLM保持对话记忆尤为重要。"
+  },
+  {
+    "title": "【论文阅读】Prompt & 记忆压缩 文献调研 AGENTS",
+    "url": "/【论文阅读】ON-MEMORY-CONSTRUCTION-AND-RETRIEVAL-FOR-PERSONALIZED-CONVERSATIONAL-AGENTS/",
+    "date": "2025-03-29",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "直接用GPT4（也尝试了Mistral-7B、RoBERTa进行验证）。同时提出类似CoT的方法利用小范围标注数据提升分割能力和质量。"
+  },
+  {
+    "title": "Normalization方法总结",
+    "url": "/Normalization方法总结/",
+    "date": "2025-03-24",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "应该是第一个提出的Normalization方法，参考 Batch normalization: Accelerating deep network training by reducing internal covariate shift"
+  },
+  {
+    "title": "【论文阅读】Beyond Retrieval: Embracing Compressive Memory in Real-World",
+    "url": "/【论文阅读】Beyond-Retrieval-Embracing-Compressive-Memory-in-Real-World/",
+    "date": "2025-03-22",
+    "tags": [
+      "AI",
+      "论文阅读"
+    ],
+    "excerpt": "传统的基于检索的方法在 记忆数据管理 和 精确检索 这两个问题上面临挑战。"
+  },
+  {
+    "title": "【论文阅读】RAP(Retrieval Augumented Perception)",
+    "url": "/【论文阅读】RAP-Retrieval-Augumented-Perception/",
+    "date": "2025-03-19",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "对于多模态大语言模型MLLMs对高分辨率图像感知HR image perception任务中，利用类似RAG的方法实现。"
+  },
+  {
+    "title": "【读书笔记】资本主义与自由",
+    "url": "/【读书笔记】资本主义与自由/",
+    "date": "2025-03-05",
+    "tags": [
+      "读书笔记"
+    ],
+    "excerpt": "美 米尔顿 弗里德曼"
+  },
+  {
+    "title": "NN学习笔记(一)",
+    "url": "/NN学习笔记-一/",
+    "date": "2025-01-23",
+    "tags": [],
+    "excerpt": "每个维度的数据，都减去均值，使得新数据的中心迁移到原点。"
+  },
+  {
+    "title": "CS231n Assignment Notes",
+    "url": "/CS231n-Assignment-Notes/",
+    "date": "2025-01-16",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "在第二个todo的时候，需要反向传播的时候计算dw、dx、db，这里给出一些推导。"
+  },
+  {
+    "title": "注意力机制 Attention",
+    "url": "/注意力机制-Attention/",
+    "date": "2025-01-15",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "注意力机制是Transformer的一大特性，最底层的"
+  },
+  {
+    "title": "softmax回归",
+    "url": "/softmax回归/",
+    "date": "2025-01-15",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "机器学习"
+    ],
+    "excerpt": "$$ \\pmb{\\hat{y}}=softmax(\\pmb{o})~\\ where ~~\\hat{y_j}=\\frac{\\exp(o_j)}{\\sum_{k}\\exp(o_k)} $$"
+  },
+  {
+    "title": "MLP 多层感知机",
+    "url": "/MLP/",
+    "date": "2025-01-15",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "机器学习"
+    ],
+    "excerpt": "线性模型表征能力有限。"
+  },
+  {
+    "title": "RAG 检索增强生成",
+    "url": "/RAG-检索增强生成/",
+    "date": "2025-01-14",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "NLP"
+    ],
+    "excerpt": ""
+  },
+  {
+    "title": "2025寒假 TODO_LIST",
+    "url": "/2025寒假-TODO-LIST/",
+    "date": "2025-01-14",
+    "tags": [],
+    "excerpt": "早上好，今日计划"
+  },
+  {
+    "title": "市场投资",
+    "url": "/市场投资/",
+    "date": "2025-01-13",
+    "tags": [],
+    "excerpt": "qualified domestic institutional investor，国内筹钱投资国外优质资产"
+  },
+  {
+    "title": "数据库期末复习",
+    "url": "/复习/",
+    "date": "2025-01-04",
+    "tags": [
+      "复习"
+    ],
+    "excerpt": "一： 3,6,7,9,15,17"
+  },
+  {
+    "title": "我实现了第一次xss注入攻击",
+    "url": "/我实现了第一次xss注入攻击0/",
+    "date": "2025-01-02",
+    "tags": [
+      "网络安全",
+      "前端"
+    ],
+    "excerpt": "xss攻击的概念我就不做过多介绍了，可以自行google，我理解中，xss就是通过某种手段，把精心设计好的恶意代码用某种方式插入到页面中，实现恶意行为。比如在某个文本框内，如果没有对<和>转义处理，放进数据库后又随着其他用户访问页面加载出来，那么这段代码可能会被解析为html标签…"
+  },
+  {
+    "title": "咖啡日记",
+    "url": "/咖啡生活/",
+    "date": "2024-12-23",
+    "tags": [
+      "日常",
+      "生活",
+      "咖啡"
+    ],
+    "excerpt": "磨豆机："
+  },
+  {
+    "title": "latest todo",
+    "url": "/latest-todo/",
+    "date": "2024-12-23",
+    "tags": [
+      "TODO"
+    ],
+    "excerpt": ""
+  },
+  {
+    "title": "pytorch学习记录",
+    "url": "/pytorch学习记录/",
+    "date": "2024-10-21",
+    "tags": [
+      "学习记录",
+      "AI"
+    ],
+    "excerpt": ""
+  },
+  {
+    "title": "优化理论和算法",
+    "url": "/优化理论和算法/",
+    "date": "2024-10-11",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "优化"
+    ],
+    "excerpt": "机器学习（深度学习）中的训练（或者说学习）离不开的就是如何有效率地改进参数，达到更优状态，在这个过程中，优化算法起到了决定性的作用：模型能否收敛、是否收敛到全局最优（而不是局部最优和鞍点）、能多块收敛（事关训练效率）。"
+  },
+  {
+    "title": "numpy&pytorch学习记录",
+    "url": "/numpy学习记录/",
+    "date": "2024-10-10",
+    "tags": [
+      "学习记录"
+    ],
+    "excerpt": "对于SVM中的一个场景："
+  },
+  {
+    "title": "【论文阅读】Layer-wise Conditioning Analysis in Exploring the Learning Dynamics of DNNs",
+    "url": "/【论文阅读】Layer-wise/",
+    "date": "2024-10-09",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "论文阅读"
+    ],
+    "excerpt": "这篇文章提出通过层间分析法(layer-wise analysis) 实现在神经网络训练中“debug”，并解释了Batch Norm后的网络到底哪好？"
+  },
+  {
+    "title": "数学补充",
+    "url": "/数学补充/",
+    "date": "2024-09-26",
+    "tags": [
+      "学习笔记",
+      "数学"
+    ],
+    "excerpt": "review:  $Av = \\lambda v$, $\\lambda$ 是特征值, $v$是特征向量，特征值代表特征向量有多重要，特征向量表示了该“特征”的内涵。"
+  },
+  {
+    "title": "【论文阅读】(BN) Batch Normalization:Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+    "url": "/【论文阅读】-BN-Batch-Normalization-Accelerating-Deep-Network-Training-by-Reducing-Internal-Covariate-Shift/",
+    "date": "2024-09-25",
+    "tags": [],
+    "excerpt": "理解 covariate shift"
+  },
+  {
+    "title": "《功利主义》读书笔记（待完善）",
+    "url": "/《功利主义》读书笔记/",
+    "date": "2024-09-24",
+    "tags": [
+      "读书笔记",
+      "社科"
+    ],
+    "excerpt": "《功利主义》，作者约翰·穆勒。"
+  },
+  {
+    "title": "【文献阅读】Normalization Techniques in Training DNNs:Methodology, Analysis and Application",
+    "url": "/【论文阅读】Normalization-Techniques-in-Training-DNNs-Methodology-Analysis-and-Application/",
+    "date": "2024-09-23",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "文献阅读"
+    ],
+    "excerpt": "针对DNN中的Normalization技术的一篇综述。"
+  },
+  {
+    "title": "9.17 学习记录",
+    "url": "/9-17-学习记录/",
+    "date": "2024-09-17",
+    "tags": [
+      "AI",
+      "学习笔记"
+    ],
+    "excerpt": "s state"
+  },
+  {
+    "title": "在Ubuntu上使用Wechat微信",
+    "url": "/在Ubuntu上使用Wechat/",
+    "date": "2024-09-12",
+    "tags": [
+      "配环境",
+      "Linux"
+    ],
+    "excerpt": "众所周知微信已经是现在中国人无法离开的应用程序了，但是在Linux上似乎没有官方版本，今天之前我也一直被一个垃圾的非官方版本折磨很久（没有截屏、剪切板粘贴图片、输入文字逻辑错误）等等"
+  },
+  {
+    "title": "《美国反对美国》读书笔记",
+    "url": "/《美国反对美国》读书笔记/",
+    "date": "2024-09-12",
+    "tags": [
+      "读书笔记",
+      "社科"
+    ],
+    "excerpt": "《美国反对美国》是王沪宁在20世纪末写的一本书，基于他在美国访问、调研几个月的经历对美国社会、精神、文化和人进行的总结和分析，里面有很多内容放到今天仍然适用，可谓从底层解析了许多“美国现象”。不得不佩服曾经的王教授、现在的国师的真知灼见和洞悉能力。"
+  },
+  {
+    "title": "西瓜书《机器学习》读书笔记",
+    "url": "/西瓜书《机器学习》读书笔记/",
+    "date": "2024-09-11",
+    "tags": [
+      "AI",
+      "学习笔记",
+      "读书笔记",
+      "机器学习",
+      "笔记"
+    ],
+    "excerpt": "$x$作为一个样本时，是列向量，$X_{n\\times d}$，n行d维列向量，代表n个样本/数据。"
+  },
+  {
+    "title": "《废除文科学部的冲击》读书笔记 - Finished",
+    "url": "/《废除文科学部的冲击》读书笔记/",
+    "date": "2024-09-11",
+    "tags": [
+      "读书笔记",
+      "社科"
+    ],
+    "excerpt": "15年，日本文科省发布的通知，被媒体扩大化、极端化，辅之以日本当时国内的政治环境，最终”废除国立大学文科学部“的消息招致举国上下的恐慌和批判。"
+  },
+  {
+    "title": "Factorio 日报",
+    "url": "/Factorio-Log/",
+    "date": "2024-09-11",
+    "tags": [
+      "游戏",
+      "日常随笔"
+    ],
+    "excerpt": "成果 ："
+  },
+  {
+    "title": "《八次危机》读书笔记",
+    "url": "/《八次危机》读书笔记/",
+    "date": "2024-08-07",
+    "tags": [
+      "经济",
+      "读书笔记",
+      "中国"
+    ],
+    "excerpt": "资本主义国家的原始积累，可以通过把相对的成本转嫁到其殖民地或附属国；而二战后的发展中国家试图遵循其原宗主国的路线进行工业化时，却无力转嫁其成本，只能依赖外部资本，根据他国资本要求改造经济结构和上层建筑，从而陷入了“发展陷阱”。"
+  },
+  {
+    "title": "anaconda使用记录",
+    "url": "/anaconda使用记录/",
+    "date": "2024-08-07",
+    "tags": [
+      "配环境"
+    ],
+    "excerpt": "在jupyter的文档中，可以使用"
+  },
+  {
+    "title": "分子生物物理_专业英语",
+    "url": "/分子生物物理-专业英语/",
+    "date": "2024-08-05",
+    "tags": [
+      "英语",
+      "专业英语"
+    ],
+    "excerpt": "In silico ：此用语是衍生自另外两个在生物学上常用的词组:in vivo(生物活体内)及in vitro(生物活体外) .但与这两个词组不同的是，in silico在拉丁文中并不存在."
+  },
+  {
+    "title": "OO_Unit3",
+    "url": "/OO-Unit3/",
+    "date": "2024-08-04",
+    "tags": [
+      "六系生活",
+      "面向对象"
+    ],
+    "excerpt": "本单元的三次作业主要是实现jml所要求的各个类以及相应方法，并进行某个方法的JUnit测试。总体来看，对于架构设计的要求大幅减弱（因为提供了相应的接口，可以认为最核心部分的架构已经设计好了），其中的难点是如果一味地按照JML写，只能保证正确性，却不能保证时间复杂度足够优秀。另外的…"
+  },
+  {
+    "title": "OO Unit4总结",
+    "url": "/OO-Unit4/",
+    "date": "2024-08-04",
+    "tags": [
+      "六系生活",
+      "面向对象"
+    ],
+    "excerpt": "[TOC]"
+  },
+  {
+    "title": "《置身事内》读书记录（后半段）",
+    "url": "/《置身事内》摘录/",
+    "date": "2024-08-01",
+    "tags": [
+      "经济",
+      "读书笔记",
+      "中国"
+    ],
+    "excerpt": "财政资金保值增值目标 vs 风险投资可能亏钱"
+  },
+  {
+    "title": "【期权期货衍生品】第二章 期货市场与中央交易对手",
+    "url": "/第二章_期货市场与中央交易对手/",
+    "date": "2024-07-05",
+    "tags": [
+      "学习笔记",
+      "金融",
+      "期权期货衍生品"
+    ],
+    "excerpt": "实物交割 ：买入卖出合约后没有进行平仓，导致最后需要把货物进行交割。绝大多数期货交易不会进行实物交割，而正是实物交割的可能性使得期货价格和即期价格联系在一起。空头方交割时，要向交易所填写 交割意向通知书（notice of intention to deliver） 。"
+  },
+  {
+    "title": "【期权期货衍生品】第三章 利用期货的对冲策略",
+    "url": "/第三章_利用期货的对冲策略/",
+    "date": "2024-07-05",
+    "tags": [
+      "学习笔记",
+      "金融",
+      "期权期货衍生品"
+    ],
+    "excerpt": "hint：即期价格、期货价格、现货价格，即期价格spot price = 现货价格 current price"
+  },
+  {
+    "title": "【期权期货衍生品】第一章 导论",
+    "url": "/第一章_导论/",
+    "date": "2024-07-05",
+    "tags": [
+      "学习笔记",
+      "金融",
+      "期权期货衍生品"
+    ],
+    "excerpt": "期货市场远远大于股票市场"
+  },
+  {
+    "title": "OS lab6 challenge shell",
+    "url": "/OS-lab6-challenge-shell/",
+    "date": "2024-06-25",
+    "tags": [
+      "六系生活",
+      "操作系统"
+    ],
+    "excerpt": "lab6的challenge是要求实现一个更加强大、功能更完善的命令行（MOS shell，mosh）相比lab6完成的简易shell，挑战性任务中的shell更具有交互性和逻辑性，也越来越贴近于用户正常使用命令行的习惯。"
+  },
+  {
+    "title": "gods' blog",
+    "url": "/gods-blog/",
+    "date": "2024-06-24",
+    "tags": [
+      "六系生活"
+    ],
+    "excerpt": "https://buaaczx.github.io/"
+  },
+  {
+    "title": "OO_Unit2",
+    "url": "/OO_Unit2/",
+    "date": "2024-04-19",
+    "tags": [
+      "六系生活",
+      "面向对象"
+    ],
+    "excerpt": "[TOC]"
+  },
+  {
+    "title": "4.1study",
+    "url": "/4-1study/",
+    "date": "2024-04-01",
+    "tags": [
+      "经济",
+      "学习记录"
+    ],
+    "excerpt": "货币中性"
+  },
+  {
+    "title": "tmp",
+    "url": "/OO评测机的自动评测脚本——基于DPO的实现/",
+    "date": "2024-03-29",
+    "tags": [
+      "六系生活",
+      "面向对象"
+    ],
+    "excerpt": "（DPO OJ的朋友们看到别打我）"
+  },
+  {
+    "title": "blog-todoList",
+    "url": "/blog-todoList/",
+    "date": "2024-03-28",
+    "tags": [
+      "Blog-setup"
+    ],
+    "excerpt": ""
+  },
+  {
+    "title": "OO Unit1 总结博客",
+    "url": "/OO-Unit1-总结博客/",
+    "date": "2024-03-28",
+    "tags": [
+      "六系生活",
+      "面向对象"
+    ],
+    "excerpt": "在本节中，将对最后一次迭代（hw3）的项目进行分析，先在此简单描述一下 我的思路 ："
+  },
+  {
+    "title": "Study List",
+    "url": "/Study-List/",
+    "date": "2024-03-25",
+    "tags": [
+      "学习记录",
+      "TODO"
+    ],
+    "excerpt": "[TOC]"
+  },
+  {
+    "title": "3.24 study",
+    "url": "/3-24-study/",
+    "date": "2024-03-25",
+    "tags": [
+      "经济",
+      "学习记录",
+      "临时"
+    ],
+    "excerpt": "货币层次：M0-M2，社融（增量）、（存量）"
+  },
+  {
+    "title": "在Ubuntu22.04配置Steam++(Watt tool)",
+    "url": "/在Ubuntu22-04配置Steam-Watt-tool/",
+    "date": "2024-03-22",
+    "tags": [
+      "配环境",
+      "Linux"
+    ],
+    "excerpt": "Steam++不仅可以用于Steam的加速，其附带的github加速也非常好用。虽然官网提供了Linux版本，但是下载安装后还是需要配置一番才能正常使用。"
+  },
+  {
+    "title": "test page",
+    "url": "/test-page/",
+    "date": "2024-03-22",
+    "tags": [
+      "Blog-setup"
+    ],
+    "excerpt": "$inline equation ~~\\theta=\\sigma$"
+  }
+]
